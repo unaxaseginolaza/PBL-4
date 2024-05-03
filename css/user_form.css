@@ -1,0 +1,42 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+:root{
+    font-family:"Open Sans", sans-serif;
+    font-size: 16px;
+    --header-bg-color: #8dc6ff;
+    --nav-font-color: white;
+    --nav-bg-color:#22313f;
+    --nav-bg-hover-color: #18272F;
+    --last-color: #34495e;
+}
+
+html{
+    margin: 0;
+}
+
+body{
+    margin: 0;
+    position: relative;
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);
+    display: flex;
+    justify-content: center;
+
+}
+
+.userForm{
+    background-color: white;
+    width: 40%;
+    text-align: center;
+    border-radius: 2rem;
+}
+
+.userForm input{
+    width: 90%;
+    margin: 1rem 0;
+}
+
+.userForm button{
+    width: 90%;
+    margin: 1rem 0;
+}
+
