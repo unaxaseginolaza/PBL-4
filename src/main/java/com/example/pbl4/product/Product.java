@@ -1,4 +1,4 @@
-package com.example.crud.product;
+package com.example.pbl4.product;
 
 import jakarta.persistence.*;
 
@@ -16,6 +16,8 @@ public class Product {
 
     @Column(unique = true)
     private String name;
+
+    @Column()
     private float price;
     private LocalDate fecha;
 

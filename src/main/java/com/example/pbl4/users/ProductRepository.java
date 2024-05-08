@@ -1,4 +1,4 @@
-package com.example.crud.product;
+package com.example.pbl4.users;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

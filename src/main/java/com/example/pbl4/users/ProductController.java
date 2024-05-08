@@ -1,4 +1,4 @@
-package com.example.crud.product;
+package com.example.pbl4.users;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

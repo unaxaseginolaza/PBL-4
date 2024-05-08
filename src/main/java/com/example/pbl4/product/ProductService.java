@@ -1,4 +1,4 @@
-package com.example.crud.product;
+package com.example.pbl4.product;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
