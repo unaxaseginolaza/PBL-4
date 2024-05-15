@@ -1,5 +1,7 @@
-package com.example.pbl4.users;
+package com.example.pbl4.customer;
 
+import com.example.pbl4.customer.Customer;
+import com.example.pbl4.customer.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,25 +12,25 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class ProductService {
+public class CustomerService {
 
-    private final ProductRepository productRepository;
+    private final CustomerRepository customerRepository;
     HashMap<String, Object> datos;
 
     @Autowired
-    public ProductService(ProductRepository productRepository) {
-        this.productRepository = productRepository;
+    public CustomerService(CustomerRepository customerRepository) {
+        this.customerRepository = customerRepository;
     }
 
-    public List<Product> getProducts() {
-        return this.productRepository.findAll();
+    public List<Customer> getCustomers() {
+        return this.customerRepository.findAll();
     }
 
-    public ResponseEntity<Object> newProduct(Product product) {
-        Optional<Product> res = productRepository.findProductByName(product.getName());
+    public ResponseEntity<Object> newCustomer(Customer customer) {
+        Optional<Customer> res = customerRepository.findProductByCompanyName(customer.getUsername());
         datos = new HashMap<>();
 
-        if (res.isPresent() && product.getId()==null) {
+        if (res.isPresent() && customer.getId() == null) {
             //throw new IllegalStateException("ya existe el producto");
             datos.put("error", true);
             datos.put("message", "Ya existe un producto con ese nombre");
@@ -39,11 +41,11 @@ public class ProductService {
             );
         }
         datos.put("message", "Se guardo con exito");
-        if (product.getId()!= null) {
+        if (customer.getId() != null) {
             datos.put("message", "Se actualizo con exito");
         }
-        productRepository.save(product);
-        datos.put("data", product);
+        customerRepository.save(customer);
+        datos.put("data", customer);
 
         return new ResponseEntity<>(
                 datos,
@@ -51,24 +53,25 @@ public class ProductService {
         );
     }
 
-    public ResponseEntity<Object> deleteProduct(Long id) {
-        boolean exists = this.productRepository.existsById(id);
+    public ResponseEntity<Object> deleteCustomer(Long id) {
+        boolean exists = this.customerRepository.existsById(id);
         datos = new HashMap<>();
 
         if (!exists) {
             datos.put("error", true);
-            datos.put("message", "No existe un producto con esa id");
+            datos.put("message", "No existe un Customer con esa id");
 
             return new ResponseEntity<>(
                     datos,
                     HttpStatus.CONFLICT
             );
         }
-        productRepository.deleteById(id);
+        customerRepository.deleteById(id);
         datos.put("message", "Producto eliminado correctamente");
         return new ResponseEntity<>(
                 datos,
                 HttpStatus.ACCEPTED
         );
     }
+
 }
