@@ -26,13 +26,13 @@ public class EmployeeService {
     }
 
     public ResponseEntity<Object> newEmployee(Employee employee) {
-        Optional<Employee> res = employeeRepository.findProductByName(employee.getName());
+        Optional<Employee> res = employeeRepository.findEmployeeByName(employee.getName());
         datos = new HashMap<>();
 
         if (res.isPresent() && employee.getId()==null) {
             //throw new IllegalStateException("ya existe el producto");
             datos.put("error", true);
-            datos.put("message", "Ya existe un producto con ese nombre");
+            datos.put("message", "Ya existe un Employee con ese nombre");
 
             return new ResponseEntity<>(
                     datos,
@@ -66,7 +66,7 @@ public class EmployeeService {
             );
         }
         employeeRepository.deleteById(id);
-        datos.put("message", "Producto eliminado correctamente");
+        datos.put("message", "Employee eliminado correctamente");
         return new ResponseEntity<>(
                 datos,
                 HttpStatus.ACCEPTED

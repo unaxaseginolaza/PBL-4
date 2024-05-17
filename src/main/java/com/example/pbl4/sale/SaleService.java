@@ -1,7 +1,5 @@
-package com.example.pbl4.task;
+package com.example.pbl4.sale;
 
-import com.example.pbl4.task.Task;
-import com.example.pbl4.task.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,27 +10,29 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class TaskService {
-    private final TaskRepository taskRepository;
+public class SaleService {
+    private final SaleRepository saleRepository;
     HashMap<String, Object> datos;
 
     @Autowired
-    public TaskService(TaskRepository taskRepository) {
-        this.taskRepository = taskRepository;
+    public SaleService(SaleRepository saleRepository) {
+        this.saleRepository = saleRepository;
     }
 
-    public List<Task> getTasks() {
-        return this.taskRepository.findAll();
+    public List<Sale> getSales() {
+        return this.saleRepository.findAll();
     }
 
-    public ResponseEntity<Object> newTask(Task task) {
-        Optional<Task> res = taskRepository.findTaskByTitle(task.getTitle());
+    public ResponseEntity<Object> newSale(Sale sale) {
+        Optional<Sale> res = saleRepository
+                .findByCustomer_CompanyNameContainsAndPriceAndQuantity
+                        (sale.getCustomer().getCompanyName(), sale.getPrice(), sale.getQuantity());
         datos = new HashMap<>();
 
-        if (res.isPresent() && task.getId() == null) {
-            //throw new IllegalStateException("ya existe el producto");
+        if (res.isPresent() && sale.getId()==null) {
+            //throw new IllegalStateException("ya existe el saleo");
             datos.put("error", true);
-            datos.put("message", "Ya existe un Task con ese nombre");
+            datos.put("message", "Ya existe un sale con ese nombre");
 
             return new ResponseEntity<>(
                     datos,
@@ -40,11 +40,11 @@ public class TaskService {
             );
         }
         datos.put("message", "Se guardo con exito");
-        if (task.getId() != null) {
+        if (sale.getId()!= null) {
             datos.put("message", "Se actualizo con exito");
         }
-        taskRepository.save(task);
-        datos.put("data", task);
+        saleRepository.save(sale);
+        datos.put("data", sale);
 
         return new ResponseEntity<>(
                 datos,
@@ -52,21 +52,21 @@ public class TaskService {
         );
     }
 
-    public ResponseEntity<Object> deleteTask(Long id) {
-        boolean exists = this.taskRepository.existsById(id);
+    public ResponseEntity<Object> deleteSale(Long id) {
+        boolean exists = this.saleRepository.existsById(id);
         datos = new HashMap<>();
 
         if (!exists) {
             datos.put("error", true);
-            datos.put("message", "No existe un Task con esa id");
+            datos.put("message", "No existe un sale con esa id");
 
             return new ResponseEntity<>(
                     datos,
                     HttpStatus.CONFLICT
             );
         }
-        taskRepository.deleteById(id);
-        datos.put("message", "Task eliminado correctamente");
+        saleRepository.deleteById(id);
+        datos.put("message", "Sale eliminado correctamente");
         return new ResponseEntity<>(
                 datos,
                 HttpStatus.ACCEPTED

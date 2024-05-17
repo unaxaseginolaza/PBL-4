@@ -1,4 +1,4 @@
-package com.example.pbl4.doTask;
+package com.example.pbl4.supplier;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,27 +10,27 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class DoTaskService {
-    private final DoTaskRepository doTaskRepository;
+public class SupplierService {
+    private final SupplierRepository supplierRepository;
     HashMap<String, Object> datos;
 
     @Autowired
-    public DoTaskService(DoTaskRepository doTaskRepository) {
-        this.doTaskRepository = doTaskRepository;
+    public SupplierService(SupplierRepository supplierRepository) {
+        this.supplierRepository = supplierRepository;
     }
 
-    public List<DoTask> getDoTasks() {
-        return this.doTaskRepository.findAll();
+    public List<Supplier> getSuppliers() {
+        return this.supplierRepository.findAll();
     }
 
-    public ResponseEntity<Object> newDoTask(DoTask doTask) {
-        Optional<DoTask> res = doTaskRepository.findProductById(doTask.getId());
+    public ResponseEntity<Object> newSupplier(Supplier supplier) {
+        Optional<Supplier> res = supplierRepository.findSupplierByName(supplier.getName());
         datos = new HashMap<>();
 
-        if (res.isPresent() && doTask.getId()==null) {
-            //throw new IllegalStateException("ya existe el producto");
+        if (res.isPresent() && supplier.getId()==null) {
+            //throw new IllegalStateException("ya existe el suppliero");
             datos.put("error", true);
-            datos.put("message", "Ya existe un producto con ese nombre");
+            datos.put("message", "Ya existe un supplier con ese nombre");
 
             return new ResponseEntity<>(
                     datos,
@@ -38,11 +38,11 @@ public class DoTaskService {
             );
         }
         datos.put("message", "Se guardo con exito");
-        if (doTask.getId()!= null) {
+        if (supplier.getId()!= null) {
             datos.put("message", "Se actualizo con exito");
         }
-        doTaskRepository.save(doTask);
-        datos.put("data", doTask);
+        supplierRepository.save(supplier);
+        datos.put("data", supplier);
 
         return new ResponseEntity<>(
                 datos,
@@ -50,21 +50,21 @@ public class DoTaskService {
         );
     }
 
-    public ResponseEntity<Object> deleteDoTask(Long id) {
-        boolean exists = this.doTaskRepository.existsById(id);
+    public ResponseEntity<Object> deleteSupplier(Long id) {
+        boolean exists = this.supplierRepository.existsById(id);
         datos = new HashMap<>();
 
         if (!exists) {
             datos.put("error", true);
-            datos.put("message", "No existe un DoTask con esa id");
+            datos.put("message", "No existe un supplier con esa id");
 
             return new ResponseEntity<>(
                     datos,
                     HttpStatus.CONFLICT
             );
         }
-        doTaskRepository.deleteById(id);
-        datos.put("message", "Producto eliminado correctamente");
+        supplierRepository.deleteById(id);
+        datos.put("message", "Supplier eliminado correctamente");
         return new ResponseEntity<>(
                 datos,
                 HttpStatus.ACCEPTED

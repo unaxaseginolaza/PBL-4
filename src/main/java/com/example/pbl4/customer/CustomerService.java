@@ -27,13 +27,13 @@ public class CustomerService {
     }
 
     public ResponseEntity<Object> newCustomer(Customer customer) {
-        Optional<Customer> res = customerRepository.findProductByCompanyName(customer.getUsername());
+        Optional<Customer> res = customerRepository.findCustomerByCompanyNameAndUsername(customer.getCompanyName(), customer.getUsername());
         datos = new HashMap<>();
 
         if (res.isPresent() && customer.getId() == null) {
             //throw new IllegalStateException("ya existe el producto");
             datos.put("error", true);
-            datos.put("message", "Ya existe un producto con ese nombre");
+            datos.put("message", "Ya existe un cliente con ese username y company name");
 
             return new ResponseEntity<>(
                     datos,
@@ -67,7 +67,7 @@ public class CustomerService {
             );
         }
         customerRepository.deleteById(id);
-        datos.put("message", "Producto eliminado correctamente");
+        datos.put("message", "Customer eliminado correctamente");
         return new ResponseEntity<>(
                 datos,
                 HttpStatus.ACCEPTED

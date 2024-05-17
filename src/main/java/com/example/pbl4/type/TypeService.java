@@ -32,7 +32,7 @@ public class TypeService {
         if (res.isPresent() && type.getId() == null) {
             //throw new IllegalStateException("ya existe el producto");
             datos.put("error", true);
-            datos.put("message", "Ya existe un producto con ese nombre");
+            datos.put("message", "Ya existe un Type con ese nombre");
 
             return new ResponseEntity<>(
                     datos,
@@ -66,7 +66,7 @@ public class TypeService {
             );
         }
         typeRepository.deleteById(id);
-        datos.put("message", "Producto eliminado correctamente");
+        datos.put("message", "Type eliminado correctamente");
         return new ResponseEntity<>(
                 datos,
                 HttpStatus.ACCEPTED

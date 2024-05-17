@@ -10,30 +10,30 @@ import java.util.List;
 @RestController
 @RequestMapping(path = "api/v1/employee")
 public class EmployeeController {
-    private final EmployeeService EmployeeService;
+    private final EmployeeService employeeService;
 
     @Autowired
-    public EmployeeController(EmployeeService EmployeeService) {
-        this.EmployeeService = EmployeeService;
+    public EmployeeController(EmployeeService employeeService) {
+        this.employeeService = employeeService;
     }
 
     @GetMapping
     public List<Employee> getEmployees() {
-        return EmployeeService.getEmployees();
+        return employeeService.getEmployees();
     }
 
     @PostMapping
     public ResponseEntity<Object> createEmployee(@RequestBody Employee Employee) {
-        return this.EmployeeService.newEmployee(Employee);
+        return this.employeeService.newEmployee(Employee);
     }
 
     @PutMapping
     public ResponseEntity<Object> updateEmployee(@RequestBody Employee Employee) {
-        return this.EmployeeService.newEmployee(Employee);
+        return this.employeeService.newEmployee(Employee);
     }
 
     @DeleteMapping(path = "/{EmployeeId}/delete")
     public ResponseEntity<Object> deleteEmployee(@PathVariable("EmployeeId")  Long id) {
-        return this.EmployeeService.deleteEmployee(id);
+        return this.employeeService.deleteEmployee(id);
     }
 }

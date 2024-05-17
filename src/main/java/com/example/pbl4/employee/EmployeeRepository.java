@@ -8,5 +8,5 @@ import java.util.Optional;
 public interface EmployeeRepository extends JpaRepository<Employee, Long> {
 
     //    @Query("SELECT * from Product p where p.name like '%1' ")
-    Optional<Employee> findProductByName(String name);
+    Optional<Employee> findEmployeeByName(String name);
 }

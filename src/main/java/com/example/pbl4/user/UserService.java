@@ -33,7 +33,7 @@ public class UserService {
         if (res.isPresent() && user.getId()==null) {
             //throw new IllegalStateException("ya existe el producto");
             datos.put("error", true);
-            datos.put("message", "Ya existe un producto con ese nombre");
+            datos.put("message", "Ya existe un User con ese nombre");
 
             return new ResponseEntity<>(
                     datos,
@@ -67,7 +67,7 @@ public class UserService {
             );
         }
         userRepository.deleteById(id);
-        datos.put("message", "Producto eliminado correctamente");
+        datos.put("message", "User eliminado correctamente");
         return new ResponseEntity<>(
                 datos,
                 HttpStatus.ACCEPTED
