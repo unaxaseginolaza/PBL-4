@@ -2,6 +2,8 @@ package com.example.pbl4.purchase;
 
 import com.example.pbl4.purchase.Purchase;
 import com.example.pbl4.purchase.PurchaseRepository;
+import com.example.pbl4.purchase.Purchase;
+import com.example.pbl4.purchase.PurchaseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +16,6 @@ import java.util.Optional;
 @Service
 public class PurchaseService {
     private final PurchaseRepository purchaseRepository;
-    HashMap<String, Object> datos;
 
     @Autowired
     public PurchaseService(PurchaseRepository purchaseRepository) {
@@ -25,53 +26,23 @@ public class PurchaseService {
         return this.purchaseRepository.findAll();
     }
 
-    public ResponseEntity<Object> newPurchase(Purchase purchase) {
-        Optional<Purchase> res = purchaseRepository
-                .findBySupplier_NameContainsAndPriceAndQuantity
-                        (purchase.getSupplier().getName(), purchase.getPrice(), purchase.getQuantity());
-        datos = new HashMap<>();
-
-        if (res.isPresent() && purchase.getId()==null) {
-            //throw new IllegalStateException("ya existe el purchaseo");
-            datos.put("error", true);
-            datos.put("message", "Ya existe un purchase con ese nombre");
-
-            return new ResponseEntity<>(
-                    datos,
-                    HttpStatus.CONFLICT
-            );
-        }
-        datos.put("message", "Se guardo con exito");
-        if (purchase.getId()!= null) {
-            datos.put("message", "Se actualizo con exito");
-        }
-        purchaseRepository.save(purchase);
-        datos.put("data", purchase);
-
-        return new ResponseEntity<>(
-                datos,
-                HttpStatus.CREATED
-        );
+    public Purchase findPurchaseById(Long id) {
+        return purchaseRepository.findById(id).orElseThrow(() -> new IllegalStateException("Purchase not found"));
     }
 
-    public ResponseEntity<Object> deletePurchase(Long id) {
-        boolean exists = this.purchaseRepository.existsById(id);
-        datos = new HashMap<>();
+    public void newPurchase(Purchase purchase) {
+        Optional<Purchase> res = purchaseRepository.findBySupplier_NameContainsAndPriceAndQuantity(purchase.getSupplier().getName(), purchase.getPrice() ,purchase.getQuantity());
+        if (res.isPresent() && purchase.getId() == null) {
+            throw new IllegalStateException("Ya existe una compra con name");
+        }
+        purchaseRepository.save(purchase);
+    }
 
+    public void deletePurchase(Long id) {
+        boolean exists = purchaseRepository.existsById(id);
         if (!exists) {
-            datos.put("error", true);
-            datos.put("message", "No existe un purchase con esa id");
-
-            return new ResponseEntity<>(
-                    datos,
-                    HttpStatus.CONFLICT
-            );
+            throw new IllegalStateException("No existe un Purchase con esa id");
         }
         purchaseRepository.deleteById(id);
-        datos.put("message", "Purchase eliminado correctamente");
-        return new ResponseEntity<>(
-                datos,
-                HttpStatus.ACCEPTED
-        );
     }
 }

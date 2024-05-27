@@ -20,25 +20,25 @@ function movingImages(event){
     if(event.target.id === 'nextImage'){
         if(actualImageId < imageMax){
             nextImageId = actualImageId + 1;
-            actualImage.src = 'image/paisaje' + nextImageId + '.jpg';
+            actualImage.src = '/image/paisaje' + nextImageId + '.jpg';
         }
         else if (actualImageId === imageMax){
-            actualImage.src = 'image/paisaje' + imageMin + '.jpg';
+            actualImage.src = '/image/paisaje' + imageMin + '.jpg';
         }
     }
     else if (event.target.id === 'previousImage'){
         if(actualImageId > imageMin){
             nextImageId = actualImageId - 1;
-            actualImage.src = 'image/paisaje' + nextImageId + '.jpg';
+            actualImage.src = '/image/paisaje' + nextImageId + '.jpg';
         }
         else if (actualImageId === imageMin){
-            actualImage.src = 'image/paisaje' + imageMax + '.jpg';
+            actualImage.src = '/image/paisaje' + imageMax + '.jpg';
         }
     }
 }
 
 function extraerNumeroDeArchivo(nombreArchivo) {
-    return parseInt(nombreArchivo.replace("http://127.0.0.1:5500/image/paisaje", "").replace(".jpg", ""));
+    return parseInt(nombreArchivo.replace("http://localhost:8080/image/paisaje", "").replace(".jpg", ""));
 }
 
 function scrollToTop() {

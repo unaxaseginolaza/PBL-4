@@ -1,5 +1,7 @@
 package com.example.pbl4.supplier;
 
+import com.example.pbl4.supplier.Supplier;
+import com.example.pbl4.supplier.SupplierRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,7 +14,6 @@ import java.util.Optional;
 @Service
 public class SupplierService {
     private final SupplierRepository supplierRepository;
-    HashMap<String, Object> datos;
 
     @Autowired
     public SupplierService(SupplierRepository supplierRepository) {
@@ -23,51 +24,23 @@ public class SupplierService {
         return this.supplierRepository.findAll();
     }
 
-    public ResponseEntity<Object> newSupplier(Supplier supplier) {
-        Optional<Supplier> res = supplierRepository.findSupplierByName(supplier.getName());
-        datos = new HashMap<>();
-
-        if (res.isPresent() && supplier.getId()==null) {
-            //throw new IllegalStateException("ya existe el suppliero");
-            datos.put("error", true);
-            datos.put("message", "Ya existe un supplier con ese nombre");
-
-            return new ResponseEntity<>(
-                    datos,
-                    HttpStatus.CONFLICT
-            );
-        }
-        datos.put("message", "Se guardo con exito");
-        if (supplier.getId()!= null) {
-            datos.put("message", "Se actualizo con exito");
-        }
-        supplierRepository.save(supplier);
-        datos.put("data", supplier);
-
-        return new ResponseEntity<>(
-                datos,
-                HttpStatus.CREATED
-        );
+    public Supplier findSupplierById(Long id) {
+        return supplierRepository.findById(id).orElseThrow(() -> new IllegalStateException("Supplier not found"));
     }
 
-    public ResponseEntity<Object> deleteSupplier(Long id) {
-        boolean exists = this.supplierRepository.existsById(id);
-        datos = new HashMap<>();
+    public void newSupplier(Supplier supplier) {
+        Optional<Supplier> res = supplierRepository.findSupplierByName(supplier.getName());
+        if (res.isPresent() && supplier.getId() == null) {
+            throw new IllegalStateException("Ya existe un empleado con name");
+        }
+        supplierRepository.save(supplier);
+    }
 
+    public void deleteSupplier(Long id) {
+        boolean exists = supplierRepository.existsById(id);
         if (!exists) {
-            datos.put("error", true);
-            datos.put("message", "No existe un supplier con esa id");
-
-            return new ResponseEntity<>(
-                    datos,
-                    HttpStatus.CONFLICT
-            );
+            throw new IllegalStateException("No existe un Supplier con esa id");
         }
         supplierRepository.deleteById(id);
-        datos.put("message", "Supplier eliminado correctamente");
-        return new ResponseEntity<>(
-                datos,
-                HttpStatus.ACCEPTED
-        );
     }
 }

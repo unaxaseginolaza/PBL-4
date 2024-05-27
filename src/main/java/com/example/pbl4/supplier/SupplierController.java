@@ -1,13 +1,14 @@
 package com.example.pbl4.supplier;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
-@RequestMapping(path = "api/v1/supplier")
+@Controller
+@RequestMapping(path = "supplier")
 public class SupplierController {
     private final SupplierService supplierService;
 
@@ -17,22 +18,40 @@ public class SupplierController {
     }
 
     @GetMapping
-    public List<Supplier> getSuppliers() {
-        return supplierService.getSuppliers();
+    public String getSuppliers(Model model) {
+        List<Supplier> suppliers = supplierService.getSuppliers();
+        model.addAttribute("suppliers", suppliers);
+        return "supplier/list"; // Retorna la vista supplier/list.html
+    }
+
+    @GetMapping("/new")
+    public String createSupplierForm(Model model) {
+        model.addAttribute("supplier", new Supplier());
+        return "supplier/new"; // Retorna la vista supplier/new.html
     }
 
     @PostMapping
-    public ResponseEntity<Object> createSupplier(@RequestBody Supplier supplier) {
-        return this.supplierService.newSupplier(supplier);
+    public String createSupplier(@ModelAttribute Supplier supplier, Model model) {
+        supplierService.newSupplier(supplier);
+        return "redirect:/supplier"; // Redirige a la lista de clientes
     }
 
-    @PutMapping
-    public ResponseEntity<Object> updateSupplier(@RequestBody Supplier supplier) {
-        return this.supplierService.newSupplier(supplier);
+    @GetMapping("/edit/{id}")
+    public String updateSupplierForm(@PathVariable("id") Long id, Model model) {
+        Supplier supplier = supplierService.findSupplierById(id); // Asumiendo que tienes un método para buscar por ID
+        model.addAttribute("supplier", supplier);
+        return "supplier/edit"; // Retorna la vista supplier/edit.html
     }
 
-    @DeleteMapping(path = "/{supplierId}/delete")
-    public ResponseEntity<Object> deleteSupplier(@PathVariable("supplierId")  Long id) {
-        return this.supplierService.deleteSupplier(id);
+    @PostMapping("/update")
+    public String updateSupplier(@ModelAttribute Supplier supplier, Model model) {
+        supplierService.newSupplier(supplier);
+        return "redirect:/supplier"; // Redirige a la lista de clientes
+    }
+
+    @PostMapping("/delete/{id}")
+    public String deleteSupplier(@PathVariable("id") Long id) {
+        supplierService.deleteSupplier(id);
+        return "redirect:/supplier"; // Redirige a la lista de clientes
     }
 }

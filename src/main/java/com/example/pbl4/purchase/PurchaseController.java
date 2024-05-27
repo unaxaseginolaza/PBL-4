@@ -1,16 +1,19 @@
 package com.example.pbl4.purchase;
 
+import com.example.pbl4.purchase.Purchase;
+import com.example.pbl4.purchase.PurchaseService;
 import com.example.pbl4.purchase.PurchaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
-@RequestMapping(path = "api/v1/purchase")
+@Controller
+@RequestMapping(path = "purchase")
 public class PurchaseController {
-
     private final PurchaseService purchaseService;
 
     @Autowired
@@ -19,22 +22,40 @@ public class PurchaseController {
     }
 
     @GetMapping
-    public List<Purchase> getPurchases() {
-        return purchaseService.getPurchases();
+    public String getPurchases(Model model) {
+        List<Purchase> purchases = purchaseService.getPurchases();
+        model.addAttribute("purchases", purchases);
+        return "purchase/list"; // Retorna la vista purchase/list.html
+    }
+
+    @GetMapping("/new")
+    public String createPurchaseForm(Model model) {
+        model.addAttribute("purchase", new Purchase());
+        return "purchase/new"; // Retorna la vista purchase/new.html
     }
 
     @PostMapping
-    public ResponseEntity<Object> createPurchase(@RequestBody Purchase purchase) {
-        return this.purchaseService.newPurchase(purchase);
+    public String createPurchase(@ModelAttribute Purchase purchase, Model model) {
+        purchaseService.newPurchase(purchase);
+        return "redirect:/purchase"; // Redirige a la lista de clientes
     }
 
-    @PutMapping
-    public ResponseEntity<Object> updatePurchase(@RequestBody Purchase purchase) {
-        return this.purchaseService.newPurchase(purchase);
+    @GetMapping("/edit/{id}")
+    public String updatePurchaseForm(@PathVariable("id") Long id, Model model) {
+        Purchase purchase = purchaseService.findPurchaseById(id); // Asumiendo que tienes un método para buscar por ID
+        model.addAttribute("purchase", purchase);
+        return "purchase/edit"; // Retorna la vista purchase/edit.html
     }
 
-    @DeleteMapping(path = "/{purchaseId}/delete")
-    public ResponseEntity<Object> deletePurchase(@PathVariable("purchaseId")  Long id) {
-        return this.purchaseService.deletePurchase(id);
+    @PostMapping("/update")
+    public String updatePurchase(@ModelAttribute Purchase purchase, Model model) {
+        purchaseService.newPurchase(purchase);
+        return "redirect:/purchase"; // Redirige a la lista de clientes
+    }
+
+    @PostMapping("/delete/{id}")
+    public String deletePurchase(@PathVariable("id") Long id) {
+        purchaseService.deletePurchase(id);
+        return "redirect:/purchase"; // Redirige a la lista de clientes
     }
 }

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="eu" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{template}">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Nire Web</title>
+        <link rel="stylesheet" href="/css/index.css">
+        <script src="/script/index.js"></script>
+    </head>
+    <body>
+        <main layout:fragment="custom-main">
+            <div class="imageGallery">
+                <button type="button" id="previousImage" class="galleryArrows">
+                </button>
+                <img src="/image/paisaje1.jpg" alt="" id="actualImage">
+                <button type="button" id="nextImage" class="galleryArrows">
+                </button>
+            </div>
+        </main>
+        <p th:text="${message}"></p>
+    </body>
+</html>

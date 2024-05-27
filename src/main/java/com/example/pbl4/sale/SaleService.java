@@ -1,18 +1,13 @@
 package com.example.pbl4.sale;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
-import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class SaleService {
     private final SaleRepository saleRepository;
-    HashMap<String, Object> datos;
 
     @Autowired
     public SaleService(SaleRepository saleRepository) {
@@ -23,53 +18,23 @@ public class SaleService {
         return this.saleRepository.findAll();
     }
 
-    public ResponseEntity<Object> newSale(Sale sale) {
-        Optional<Sale> res = saleRepository
-                .findByCustomer_CompanyNameContainsAndPriceAndQuantity
-                        (sale.getCustomer().getCompanyName(), sale.getPrice(), sale.getQuantity());
-        datos = new HashMap<>();
-
-        if (res.isPresent() && sale.getId()==null) {
-            //throw new IllegalStateException("ya existe el saleo");
-            datos.put("error", true);
-            datos.put("message", "Ya existe un sale con ese nombre");
-
-            return new ResponseEntity<>(
-                    datos,
-                    HttpStatus.CONFLICT
-            );
-        }
-        datos.put("message", "Se guardo con exito");
-        if (sale.getId()!= null) {
-            datos.put("message", "Se actualizo con exito");
-        }
-        saleRepository.save(sale);
-        datos.put("data", sale);
-
-        return new ResponseEntity<>(
-                datos,
-                HttpStatus.CREATED
-        );
+    public Sale findSaleById(Long id) {
+        return saleRepository.findById(id).orElseThrow(() -> new IllegalStateException("Sale not found"));
     }
 
-    public ResponseEntity<Object> deleteSale(Long id) {
-        boolean exists = this.saleRepository.existsById(id);
-        datos = new HashMap<>();
+    public void newSale(Sale sale) {
+        Optional<Sale> res = saleRepository.findByCustomer_CompanyNameContainsAndPriceAndQuantity(sale.getCustomer().getCompanyName(), sale.getPrice() ,sale.getQuantity());
+        if (res.isPresent() && sale.getId() == null) {
+            throw new IllegalStateException("Ya existe un venta con name");
+        }
+        saleRepository.save(sale);
+    }
 
+    public void deleteSale(Long id) {
+        boolean exists = saleRepository.existsById(id);
         if (!exists) {
-            datos.put("error", true);
-            datos.put("message", "No existe un sale con esa id");
-
-            return new ResponseEntity<>(
-                    datos,
-                    HttpStatus.CONFLICT
-            );
+            throw new IllegalStateException("No existe un Sale con esa id");
         }
         saleRepository.deleteById(id);
-        datos.put("message", "Sale eliminado correctamente");
-        return new ResponseEntity<>(
-                datos,
-                HttpStatus.ACCEPTED
-        );
     }
 }

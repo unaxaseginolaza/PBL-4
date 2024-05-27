@@ -1,17 +1,16 @@
 package com.example.pbl4.customer;
 
-import com.example.pbl4.customer.Customer;
-import com.example.pbl4.customer.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
-@RequestMapping(path = "api/v1/customer")
+@Controller
+@RequestMapping(path = "customer")
 public class CustomerController {
-    
+
     private final CustomerService customerService;
 
     @Autowired
@@ -20,23 +19,40 @@ public class CustomerController {
     }
 
     @GetMapping
-    public List<Customer> getCustomers() {
-        return customerService.getCustomers();
+    public String getCustomers(Model model) {
+        List<Customer> customers = customerService.getCustomers();
+        model.addAttribute("customers", customers);
+        return "customer/list"; // Retorna la vista customer/list.html
+    }
+
+    @GetMapping("/new")
+    public String createCustomerForm(Model model) {
+        model.addAttribute("customer", new Customer());
+        return "customer/new"; // Retorna la vista customer/new.html
     }
 
     @PostMapping
-    public ResponseEntity<Object> createCustomer(@RequestBody Customer customer) {
-        return this.customerService.newCustomer(customer);
+    public String createCustomer(@ModelAttribute Customer customer, Model model) {
+        customerService.newCustomer(customer);
+        return "redirect:/customer"; // Redirige a la lista de clientes
     }
 
-    @PutMapping
-    public ResponseEntity<Object> updateCustomer(@RequestBody Customer customer) {
-        return this.customerService.newCustomer(customer);
+    @GetMapping("/edit/{id}")
+    public String updateCustomerForm(@PathVariable("id") Long id, Model model) {
+        Customer customer = customerService.findCustomerById(id); // Asumiendo que tienes un método para buscar por ID
+        model.addAttribute("customer", customer);
+        return "customer/edit"; // Retorna la vista customer/edit.html
     }
 
-    @DeleteMapping(path = "/{CustomerId}/delete")
-    public ResponseEntity<Object> deleteCustomer(@PathVariable("CustomerId") Long id) {
-        return this.customerService.deleteCustomer(id);
+    @PostMapping("/update")
+    public String updateCustomer(@ModelAttribute Customer customer, Model model) {
+        customerService.newCustomer(customer);
+        return "redirect:/customer"; // Redirige a la lista de clientes
     }
 
+    @PostMapping("/delete/{id}")
+    public String deleteCustomer(@PathVariable("id") Long id) {
+        customerService.deleteCustomer(id);
+        return "redirect:/customer"; // Redirige a la lista de clientes
+    }
 }

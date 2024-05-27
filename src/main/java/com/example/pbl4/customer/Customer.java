@@ -8,6 +8,7 @@ import jakarta.persistence.*;
 @Table
 @DiscriminatorValue("CUSTOMER")
 public class Customer extends User {
+
     private String companyName;
 
     public Customer(Long id, String username, String password, Integer permisos, String companyName) {
@@ -24,6 +25,7 @@ public class Customer extends User {
         this.companyName = companyName;
     }
 
+
     public Customer() {
 
     }
@@ -35,4 +37,5 @@ public class Customer extends User {
     public void setCompanyName(String companyName) {
         this.companyName = companyName;
     }
+
 }

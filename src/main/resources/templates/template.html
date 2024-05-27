@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" lang="eu">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/css/index.css">
+        <script src="/script/index.js"></script>
+    </head>
+    <body>
+        <header layout:fragment="custom-header">
+            <a href="/"><img src="/icon/home-line.svg" alt="home" id="homeButton"></a>
+            <h1>Nire Web</h1>
+            <a href="/login"><img src="/icon/user-line.svg" alt="user" id="loginUserButton"></a>
+        </header>
+        <nav layout:fragment="custom-nav">
+            <ul class="menu">
+                <li>menu 1
+                    <ul class="submenu">
+                        <li>hola</li>
+                        <li>2</li>
+                        <li>3</li>
+                    </ul>
+                </li>
+                <li>menu 2
+                    <ul class="submenu">
+                        <li>1vhb mfvcgm</li>
+                        <li>2</li>
+                        <li>3</li>
+                    </ul>
+                </li>
+                <li>menu 3</li>
+                <li>menu 4</li>
+            </ul>
+        </nav>
+        <main layout:fragment="custom-main">
+            <!-- Contenido principal predeterminado -->
+
+        </main>
+        <div id="UpButton">
+            <img src="/icon/arrow-up-wide-line.svg" alt="Subir">
+        </div>
+        <footer layout:fragment="custom-footer">
+            <p>Egileak: </p>
+            <p>Unai Herrero </p>
+            <p>Asier Berreteaga </p>
+            <p>Asier Martinez de Antoñana </p>
+            <p>Unax Aseguinolaza  </p>
+        </footer>
+    </body>
+</html>

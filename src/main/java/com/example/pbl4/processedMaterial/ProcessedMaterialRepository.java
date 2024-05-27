@@ -1,6 +1,5 @@
 package com.example.pbl4.processedMaterial;
 
-import com.example.pbl4.preProcessedMaterial.PreProcessedMaterial;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

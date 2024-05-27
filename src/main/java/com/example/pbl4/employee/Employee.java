@@ -1,5 +1,6 @@
 package com.example.pbl4.employee;
 
+import com.example.pbl4.section.Section;
 import com.example.pbl4.user.User;
 import jakarta.persistence.*;
 
@@ -15,22 +16,9 @@ public class Employee extends User {
     @JoinColumn(name = "manager_id")
     private Employee manager;
 
-    public Employee(Long id, String username, String password, Integer permisos, String name, String surname) {
-        super(id, username, password, permisos);
-        this.name = name;
-        this.surname = surname;
-    }
-
-    public Employee(String name, String surname) {
-        this.name = name;
-        this.surname = surname;
-    }
-
-    public Employee(String username, String password, Integer permisos, String name, String surname) {
-        super(username, password, permisos);
-        this.name = name;
-        this.surname = surname;
-    }
+    @ManyToOne
+    @JoinColumn(name = "section_id")
+    private Section section;
 
     public Employee() {
 
@@ -58,6 +46,37 @@ public class Employee extends User {
 
     public void setManager(Employee manager) {
         this.manager = manager;
+    }
+
+    public Section getSection() {
+        return section;
+    }
+
+    public void setSection(Section section) {
+        this.section = section;
+    }
+
+    public Employee(Long id, String username, String password, Integer permisos, String name, String surname, Employee manager, Section section) {
+        super(id, username, password, permisos);
+        this.name = name;
+        this.surname = surname;
+        this.manager = manager;
+        this.section = section;
+    }
+
+    public Employee(String name, String surname, Employee manager, Section section) {
+        this.name = name;
+        this.surname = surname;
+        this.manager = manager;
+        this.section = section;
+    }
+
+    public Employee(String username, String password, Integer permisos, String name, String surname, Employee manager, Section section) {
+        super(username, password, permisos);
+        this.name = name;
+        this.surname = surname;
+        this.manager = manager;
+        this.section = section;
     }
 }
 

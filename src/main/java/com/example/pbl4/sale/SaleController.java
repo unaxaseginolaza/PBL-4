@@ -1,15 +1,15 @@
 package com.example.pbl4.sale;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
-@RequestMapping(path = "api/v1/sale")
+@Controller
+@RequestMapping(path = "sale")
 public class SaleController {
-
     private final SaleService saleService;
 
     @Autowired
@@ -18,22 +18,40 @@ public class SaleController {
     }
 
     @GetMapping
-    public List<Sale> getSales() {
-        return saleService.getSales();
+    public String getSales(Model model) {
+        List<Sale> sales = saleService.getSales();
+        model.addAttribute("sales", sales);
+        return "sale/list"; // Retorna la vista sale/list.html
+    }
+
+    @GetMapping("/new")
+    public String createSaleForm(Model model) {
+        model.addAttribute("sale", new Sale());
+        return "sale/new"; // Retorna la vista sale/new.html
     }
 
     @PostMapping
-    public ResponseEntity<Object> createSale(@RequestBody Sale sale) {
-        return this.saleService.newSale(sale);
+    public String createSale(@ModelAttribute Sale sale, Model model) {
+        saleService.newSale(sale);
+        return "redirect:/sale"; // Redirige a la lista de clientes
     }
 
-    @PutMapping
-    public ResponseEntity<Object> updateSale(@RequestBody Sale sale) {
-        return this.saleService.newSale(sale);
+    @GetMapping("/edit/{id}")
+    public String updateSaleForm(@PathVariable("id") Long id, Model model) {
+        Sale sale = saleService.findSaleById(id); // Asumiendo que tienes un método para buscar por ID
+        model.addAttribute("sale", sale);
+        return "sale/edit"; // Retorna la vista sale/edit.html
     }
 
-    @DeleteMapping(path = "/{saleId}/delete")
-    public ResponseEntity<Object> deleteSale(@PathVariable("saleId")  Long id) {
-        return this.saleService.deleteSale(id);
+    @PostMapping("/update")
+    public String updateSale(@ModelAttribute Sale sale, Model model) {
+        saleService.newSale(sale);
+        return "redirect:/sale"; // Redirige a la lista de clientes
+    }
+
+    @PostMapping("/delete/{id}")
+    public String deleteSale(@PathVariable("id") Long id) {
+        saleService.deleteSale(id);
+        return "redirect:/sale"; // Redirige a la lista de clientes
     }
 }
