@@ -21,7 +21,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/*", "/index", "/css/*", "/script/*", "/image/*", "/icon/*", "/user/*", "/employe/*", "/customer/*", "/templates/*", "/login/*", "/login").permitAll() // Permitir acceso sin autenticación a estas rutas
+                        .requestMatchers("/*", "/index", "/css/*", "/script/*", "/image/*", "/icon/*", "/user/*", "/employee/*", "/customer/*", "/templates/*", "/login/*", "/login").permitAll() // Permitir acceso sin autenticación a estas rutas
                         .anyRequest().authenticated() // Requiere autenticación para cualquier otra solicitud
                 )
                 .csrf(AbstractHttpConfigurer::disable); // Deshabilitar CSRF si estás manejando los tokens tú mismo.
