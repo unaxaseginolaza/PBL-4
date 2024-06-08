@@ -1,7 +1,5 @@
 package com.example.pbl4.type;
 
-import com.example.pbl4.type.Type;
-import com.example.pbl4.type.TypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -39,5 +37,18 @@ public class TypeService {
             throw new IllegalStateException("No existe un Type con esa id");
         }
         typeRepository.deleteById(id);
+    }
+
+    public void updateType(Type updatedType) {
+        Type existingType = findTypeById(updatedType.getId());
+
+        existingType.setName(updatedType.getName());
+        existingType.setDescription(updatedType.getDescription());
+
+        typeRepository.save(existingType);
+    }
+
+    public List<Type> getAllTypes() {
+        return typeRepository.findAll();
     }
 }

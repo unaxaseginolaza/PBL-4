@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{template}" lang="eu">
+<head>
+    <link rel="stylesheet" href="/css/list.css">
+    <title>Task Form</title>
+    <script src="/script/task.js"></script>
+</head>
+<body>
+<main layout:fragment="custom-main">
+    <h2 th:text="${task.id != null} ? 'Edit Task' : 'Create Task'"></h2>
+    <form th:action="${task.id != null} ? @{/task/update} : @{/task/create}" th:object="${task}" method="post" class="Form">
+        <input type="hidden" th:if="${task.id != null}" th:field="*{id}">
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" th:field="*{title}" required>
+        <label for="summary">Summary:</label>
+        <input type="text" id="summary" name="summary" th:field="*{summary}" required>
+        <label for="creator">Creator (ID):</label>
+        <select id="creator" name="creator" th:field="*{creator}">
+            <option th:each="creator : ${creators}" th:value="${creator.id}" th:text="${creator.name}"></option>
+        </select>
+        <label for="inCharge">InCharge (ID):</label>
+        <select id="inCharge" name="inCharge" th:field="*{inCharge}">
+            <option th:each="inCharge : ${inCharges}" th:value="${inCharge.id}" th:text="${inCharge.name}"></option>
+        </select>
+        <label for="preProcessedMaterial">PreProcessedMaterial (ID):</label>
+        <select id="preProcessedMaterial" name="preProcessedMaterial" th:field="*{preProcessedMaterial}" onchange="ensureOnlyOneMaterialSelected(this, 'processedMaterial')">
+            <option value="" th:text="'Select a PreProcessedMaterial'"></option>
+            <option th:each="preProcessedMaterial : ${preProcessedMaterials}" th:value="${preProcessedMaterial.id}" th:text="${preProcessedMaterial.type.name}"></option>
+        </select>
+        <label for="processedMaterial">ProcessedMaterial (ID):</label>
+        <select id="processedMaterial" name="processedMaterial" th:field="*{processedMaterial}" onchange="ensureOnlyOneMaterialSelected(this, 'preProcessedMaterial')">
+            <option value="" th:text="'Select a ProcessedMaterial'"></option>
+            <option th:each="processedMaterial : ${processedMaterials}" th:value="${processedMaterial.id}" th:text="${processedMaterial.preProcessedMaterial.type.name}"></option>
+        </select>
+        <button type="submit" th:text="${task.id != null} ? 'Update' : 'Create'"></button>
+    </form>
+</main>
+<script src="/scripts/task.js"></script>
+</body>
+</html>

@@ -1,5 +1,6 @@
 package com.example.pbl4.user;
 
+import com.example.pbl4.config.Rol;
 import jakarta.persistence.*;
 
 @Entity
@@ -15,7 +16,9 @@ public abstract class User {
 
     @Column(unique = true)
     private String password;
-    private Integer permisos;
+
+    @Enumerated(EnumType.STRING)
+    private Rol rol;
 
     public Long getId() {
         return id;
@@ -41,27 +44,27 @@ public abstract class User {
         this.password = password;
     }
 
-    public Integer getPermisos() {
-        return permisos;
+    public Rol getRol() {
+        return rol;
     }
 
-    public void setPermisos(Integer permisos) {
-        this.permisos = permisos;
+    public void setRol(Rol rol) {
+        this.rol = rol;
     }
 
-    public User(Long id, String username, String password, Integer permisos) {
+    public User(Long id, String username, String password, Rol rol) {
         this.id = id;
         this.username = username;
         this.password = password;
-        this.permisos = permisos;
+        this.rol = rol;
     }
 
     public User() {
     }
 
-    public User(String username, String password, Integer permisos) {
+    public User(String username, String password, Rol rol) {
         this.username = username;
         this.password = password;
-        this.permisos = permisos;
+        this.rol = rol;
     }
 }

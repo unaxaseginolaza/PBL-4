@@ -1,5 +1,6 @@
 package com.example.pbl4.employee;
 
+import com.example.pbl4.config.Rol;
 import com.example.pbl4.section.Section;
 import com.example.pbl4.user.User;
 import jakarta.persistence.*;
@@ -56,8 +57,8 @@ public class Employee extends User {
         this.section = section;
     }
 
-    public Employee(Long id, String username, String password, Integer permisos, String name, String surname, Employee manager, Section section) {
-        super(id, username, password, permisos);
+    public Employee(Long id, String username, String password, Rol rol , String name, String surname, Employee manager, Section section) {
+        super(id, username, password, rol);
         this.name = name;
         this.surname = surname;
         this.manager = manager;
@@ -71,8 +72,8 @@ public class Employee extends User {
         this.section = section;
     }
 
-    public Employee(String username, String password, Integer permisos, String name, String surname, Employee manager, Section section) {
-        super(username, password, permisos);
+    public Employee(String username, String password, Rol rol, String name, String surname, Employee manager, Section section) {
+        super(username, password, rol);
         this.name = name;
         this.surname = surname;
         this.manager = manager;

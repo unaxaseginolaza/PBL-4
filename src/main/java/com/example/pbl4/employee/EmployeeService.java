@@ -22,6 +22,10 @@ public class EmployeeService {
         return employeeRepository.findById(id).orElseThrow(() -> new IllegalStateException("Employee not found"));
     }
 
+    public List<Employee> getAllEmployees() {
+        return employeeRepository.findAll();
+    }
+
     public void newEmployee(Employee employee) {
         Optional<Employee> res = employeeRepository.findEmployeeByName(employee.getName());
         if (res.isPresent() && employee.getId() == null) {
@@ -36,5 +40,19 @@ public class EmployeeService {
             throw new IllegalStateException("No existe un Employee con esa id");
         }
         employeeRepository.deleteById(id);
+    }
+
+    public void updateEmployee(Employee updatedEmployee) {
+        Employee existingEmployee = findEmployeeById(updatedEmployee.getId());
+
+        existingEmployee.setUsername(updatedEmployee.getUsername());
+        existingEmployee.setPassword(updatedEmployee.getPassword()); // En este punto, la contraseña ya debería estar codificada
+        existingEmployee.setRol(updatedEmployee.getRol());
+        existingEmployee.setName(updatedEmployee.getName());
+        existingEmployee.setSurname(updatedEmployee.getSurname());
+        existingEmployee.setManager(updatedEmployee.getManager());
+        existingEmployee.setSection(updatedEmployee.getSection());
+
+        employeeRepository.save(existingEmployee);
     }
 }

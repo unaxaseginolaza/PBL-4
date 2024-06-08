@@ -1,5 +1,6 @@
 package com.example.pbl4.type;
 
+import com.example.pbl4.preProcessedMaterial.PreProcessedMaterial;
 import jakarta.persistence.*;
 
 @Entity
@@ -13,15 +14,21 @@ public class Type {
     private String name;
     private String description;
 
-    public Type(String description, String name) {
+    // Relación OneToOne con PreProcessedMaterial
+    @OneToOne(mappedBy = "type", cascade = CascadeType.ALL, orphanRemoval = true)
+    private PreProcessedMaterial preProcessedMaterial;
+
+    public Type(String description, String name, PreProcessedMaterial preProcessedMaterial) {
         this.description = description;
         this.name = name;
+        this.preProcessedMaterial = preProcessedMaterial;
     }
 
-    public Type(Long id, String description, String name) {
+    public Type(Long id, String description, String name, PreProcessedMaterial preProcessedMaterial) {
         this.id = id;
         this.description = description;
         this.name = name;
+        this.preProcessedMaterial = preProcessedMaterial;
     }
 
     public Type(){
@@ -50,5 +57,13 @@ public class Type {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public PreProcessedMaterial getPreProcessedMaterial() {
+        return preProcessedMaterial;
+    }
+
+    public void setPreProcessedMaterial(PreProcessedMaterial preProcessedMaterial) {
+        this.preProcessedMaterial = preProcessedMaterial;
     }
 }

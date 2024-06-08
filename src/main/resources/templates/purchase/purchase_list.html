@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{template}" lang="eu">
+<head>
+    <title>Lista de Compras</title>
+    <link rel="stylesheet" href="/css/list.css">
+</head>
+<body>
+<main class="List" layout:fragment="custom-main">
+    <h1>Lista de Compras</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Fecha</th>
+                <th>Cantidad</th>
+                <th>Precio</th>
+                <th>Vendedor</th>
+                <th>Material</th>
+<!--                <th>Actions</th>-->
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="purchase : ${purchases}">
+                <td th:text="${purchase.date}"></td>
+                <td th:text="${purchase.quantity}"></td>
+                <td th:text="${purchase.price}"></td>
+                <td th:text="${purchase.supplier.name}"></td>
+                <td th:text="${purchase.preProcessedMaterial.type.name}"></td>
+<!--                <td>-->
+<!--                    <form th:action="@{/purchase/edit/{id}(id=${purchase.id})}" method="get">-->
+<!--                        <button type="submit" class="update-btn">Update</button>-->
+<!--                    </form>-->
+<!--                    <form th:action="@{/purchase/delete/{id}(id=${purchase.id})}" method="post" th:object="${purchase}" style="display:inline;">-->
+<!--                        <button type="submit" class="delete-btn">Delete</button>-->
+<!--                    </form>-->
+<!--                </td>-->
+            </tr>
+        </tbody>
+    </table>
+</main>
+<div id="UpButton">
+    <img src="/icon/arrow-up-wide-line.svg" alt="Subir">
+</div>
+</body>
+</html>

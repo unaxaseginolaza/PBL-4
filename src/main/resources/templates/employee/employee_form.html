@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{template}" lang="eu">
+<head>
+    <link rel="stylesheet" href="/css/list.css">
+    <title>Employee Form</title>
+</head>
+<body>
+<main layout:fragment="custom-main">
+    <h2 th:text="${employee.id != null} ? 'Edit Employee' : 'Create Employee'"></h2>
+    <form th:action="${employee.id != null} ? @{/employee/update} : @{/employee/create}" th:object="${employee}" method="post" class="Form">
+        <input type="hidden" th:if="${employee.id != null}" th:field="*{id}">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" th:field="*{username}" required>
+        <div th:if="${employee.id == null}">
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" th:field="*{password}" required>
+        </div>
+        <label for="rol">Rol:</label>
+        <select id="rol" name="rol" th:field="*{rol}" required>
+            <option th:each="role : ${roles}" th:value="${role}" th:text="${role}">Role</option>
+        </select>
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" th:field="*{name}" required>
+        <label for="surname">Surname:</label>
+        <input type="text" id="surname" name="surname" th:field="*{surname}" required>
+        <label for="manager">Manager (ID):</label>
+        <select id="manager" name="manager" th:field="*{manager}">
+            <option th:each="manager : ${managers}" th:value="${manager.id}" th:text="${manager.name}"></option>
+        </select>
+        <label for="section">Section (ID):</label>
+        <select id="section" name="section" th:field="*{section}">
+            <option th:each="section : ${sections}" th:value="${section.id}" th:text="${section.name}"></option>
+        </select>
+        <button type="submit" th:text="${employee.id != null} ? 'Update' : 'Create'"></button>
+    </form>
+</main>
+</body>
+</html>

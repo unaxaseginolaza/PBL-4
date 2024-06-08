@@ -1,5 +1,6 @@
 package com.example.pbl4.customer;
 
+import com.example.pbl4.config.Rol;
 import com.example.pbl4.employee.Employee;
 import com.example.pbl4.user.User;
 import jakarta.persistence.*;
@@ -11,8 +12,8 @@ public class Customer extends User {
 
     private String companyName;
 
-    public Customer(Long id, String username, String password, Integer permisos, String companyName) {
-        super(id, username, password, permisos);
+    public Customer(Long id, String username, String password, Rol rol, String companyName) {
+        super(id, username, password, rol);
         this.companyName = companyName;
     }
 
@@ -20,8 +21,8 @@ public class Customer extends User {
         this.companyName = companyName;
     }
 
-    public Customer(String username, String password, Integer permisos, String companyName) {
-        super(username, password, permisos);
+    public Customer(String username, String password, Rol rol, String companyName) {
+        super(username, password, rol);
         this.companyName = companyName;
     }
 

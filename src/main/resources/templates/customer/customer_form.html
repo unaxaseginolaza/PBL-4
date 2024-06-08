@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{template}" lang="eu">
+<head>
+    <link rel="stylesheet" href="/css/list.css">
+    <title>Customer Form</title>
+</head>
+<body>
+<main layout:fragment="custom-main">
+    <h2 th:text="${customer.id != null} ? 'Edit Customer' : 'Create Customer'"></h2>
+    <form th:action="${customer.id != null} ? @{/customer/update} : @{/customer/create}" th:object="${customer}" method="post" class="Form">
+        <input type="hidden" th:if="${customer.id != null}" th:field="*{id}">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" th:field="*{username}" required>
+        <div th:if="${customer.id == null}">
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" th:field="*{password}" required>
+        </div>
+        <label for="rol">Rol:</label>
+        <select id="rol" name="rol" th:field="*{rol}" required>
+            <option th:each="role : ${roles}" th:value="${role}" th:text="${role}">Role</option>
+        </select>
+        <label for="companyName">companyName:</label>
+        <input type="text" id="companyName" name="companyName" th:field="*{companyName}" required>
+        <button type="submit" th:text="${customer.id != null} ? 'Update' : 'Create'"></button>
+    </form>
+</main>
+</body>
+</html>

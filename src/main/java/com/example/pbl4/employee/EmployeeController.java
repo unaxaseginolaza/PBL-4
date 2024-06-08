@@ -1,12 +1,11 @@
+// EmployeeController.java
 package com.example.pbl4.employee;
 
-import com.example.pbl4.employee.Employee;
-import com.example.pbl4.employee.EmployeeService;
-import com.example.pbl4.employee.EmployeeService;
+import com.example.pbl4.config.Rol;
 import com.example.pbl4.section.Section;
 import com.example.pbl4.section.SectionRepository;
+import com.example.pbl4.section.SectionService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,41 +19,36 @@ public class EmployeeController {
     private final EmployeeService employeeService;
     private final SectionRepository sectionRepository;
     private final BCryptPasswordEncoder passwordEncoder;
+    private final SectionService sectionService;
 
     @Autowired
-    public EmployeeController(EmployeeService employeeService, SectionRepository sectionRepository, BCryptPasswordEncoder passwordEncoder) {
+    public EmployeeController(EmployeeService employeeService, SectionRepository sectionRepository, BCryptPasswordEncoder passwordEncoder, SectionService sectionService) {
         this.employeeService = employeeService;
         this.sectionRepository = sectionRepository;
         this.passwordEncoder = passwordEncoder;
+        this.sectionService = sectionService;
     }
 
-    @GetMapping
+    @GetMapping("/list")
     public String getEmployees(Model model) {
         List<Employee> employees = employeeService.getEmployees();
         model.addAttribute("employees", employees);
-        return "employee/list"; // Retorna la vista employee/list.html
+        return "employee/employee_list"; // Retorna la vista employee/list.html
     }
-
-    /*@GetMapping("/new")
-    public String createEmployeeForm(Model model) {
-        model.addAttribute("employee", new Employee());
-        return "employee/new"; // Retorna la vista employee/new.html
-    }*/
 
     @PostMapping("/create")
     public String createEmployee(@RequestParam("username") String username,
                                  @RequestParam("password") String password,
-                                 @RequestParam("permisos") Integer permisos,
+                                 @RequestParam("rol") Rol rol,
                                  @RequestParam("name") String name,
                                  @RequestParam("surname") String surname,
-                                 @RequestParam("manager") Long managerId,
-                                 @RequestParam("section") Long sectionId,
+                                 @RequestParam(value = "manager", required = false) Long managerId,
+                                 @RequestParam(value = "section", required = false) Long sectionId,
                                  Model model) {
-        // Crear el nuevo empleado
         Employee employee = new Employee();
         employee.setUsername(username);
         employee.setPassword(passwordEncoder.encode(password));
-        employee.setPermisos(permisos);
+        employee.setRol(rol);
         employee.setName(name);
         employee.setSurname(surname);
 
@@ -72,31 +66,38 @@ public class EmployeeController {
 
         // Guardar el nuevo empleado
         employeeService.newEmployee(employee);
-        return "redirect:/employee"; // Redirige a la lista de empleados
+        return "redirect:/employee/list"; // Redirige a la lista de empleados
     }
 
     @GetMapping("/edit/{id}")
     public String updateEmployeeForm(@PathVariable("id") Long id, Model model) {
         Employee employee = employeeService.findEmployeeById(id); // Asumiendo que tienes un método para buscar por ID
         model.addAttribute("employee", employee);
-        return "employee/edit"; // Retorna la vista employee/edit.html
+        model.addAttribute("managers", employeeService.getAllEmployees());
+        model.addAttribute("sections", sectionService.getAllSections());
+        model.addAttribute("roles", Rol.values()); // Para rellenar el select
+
+        return "employee/employee_form"; // Retorna la vista employee_form.html por que el formulario es el mismo pero en uno jala los datos y en el otro los actualiza
     }
 
     @PostMapping("/update")
-    public String updateEmployee(@ModelAttribute Employee employee, Model model) {
-        employeeService.newEmployee(employee);
-        return "redirect:/employee"; // Redirige a la lista de clientes
+    public String updateEmployee(@ModelAttribute Employee employee) {
+        employeeService.updateEmployee(employee);
+        return "redirect:/employee/list"; // Redirige a la lista de empleados
     }
 
     @PostMapping("/delete/{id}")
     public String deleteEmployee(@PathVariable("id") Long id) {
         employeeService.deleteEmployee(id);
-        return "redirect:/employee"; // Redirige a la lista de clientes
+        return "redirect:/employee/list"; // Redirige a la lista de empleado
     }
 
     @GetMapping("/form")
     public String showEmployeeForm(Model model) {
         model.addAttribute("employee", new Employee());
-        return "employee_form";
+        model.addAttribute("managers", employeeService.getAllEmployees());
+        model.addAttribute("sections", sectionService.getAllSections());
+        model.addAttribute("roles", Rol.values()); // Para rellenar el select
+        return "employee/employee_form";
     }
 }

@@ -1,11 +1,6 @@
 package com.example.pbl4.supplier;
 
-
 import jakarta.persistence.*;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import java.time.LocalDate;
 
 @Entity
 @Table
@@ -16,8 +11,6 @@ public class Supplier {
 
     private String name;
     private String direction;
-
-    private LocalDate date;
 
     public String getName() {
         return name;

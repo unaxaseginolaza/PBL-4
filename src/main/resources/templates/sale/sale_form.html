@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{template}" lang="eu" >
+<head>
+    <title>Form Sale</title>
+    <link rel="stylesheet" href="/css/list.css">
+</head>
+<body>
+<main layout:fragment="custom-main">
+    <h2 th:text="${sale.id != null} ? 'Edit Sale' : 'Create Sale'"></h2>
+    <form th:action="${sale.id != null} ? @{/sale/update} : @{/sale/create}" th:object="${sale}" method="post" class="Form">
+        <input type="hidden" th:if="${sale.id != null}" th:field="*{id}">
+        <label for="price">Price:</label>
+        <input type="number" id="price" name="price" th:field="*{price}" step="0.01" required>
+        <label for="quantity">Quantity:</label>
+        <input type="number" id="quantity" name="quantity" th:field="*{quantity}" step="0.01" required>
+        <label for="customer">Supplier (ID):</label>
+        <select id="customer" name="customer" th:field="*{customer}">
+            <option th:each="customer : ${customers}" th:value="${customer.id}" th:text="${customer.companyName}"></option>
+        </select>
+        <label for="ProcessedMaterial">ProcessedMaterial (ID):</label>
+        <select id="ProcessedMaterial" name="ProcessedMaterial" th:field="*{ProcessedMaterial}">
+            <option th:each="ProcessedMaterial : ${ProcessedMaterials}" th:value="${ProcessedMaterial.id}" th:text="${ProcessedMaterial.preProcessedMaterial.type.name}"></option>
+        </select>
+        <button type="submit" th:text="${sale.id != null} ? 'Update' : 'Create'"></button>
+    </form>
+</main>
+</body>
+</html>

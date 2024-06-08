@@ -3,11 +3,45 @@
 :root{
     font-family:"Open Sans", sans-serif;
     font-size: 16px;
+
+    --n-of-columns: 1;
+
+    --shadow: 0 0 0.5em 0 var(--shadow-color);
+    --shadow-hover: 0 0 0.3em 0 var(--shadow-color);
+
+    /*COLORS*/
+
     --header-bg-color: #8dc6ff;
+    --header-txt-color: #22313f;
+
     --nav-font-color: white;
     --nav-bg-color:#22313f;
     --nav-bg-hover-color: #18272F;
-    --last-color: #34495e;
+    --nav-sub-font-color: white;
+    --nav-sub-bg-color:#22313f;
+    --nav-sub-bg-hover-color: #18272F;
+
+    --arrow-bg-color: white;
+    --up-btn-bg-color: #22313f;
+
+    --art-bg-color: #34495e;
+    --art-title-color: white;
+    --art-tab-bg-color: white;
+    --art-footer-bg-color: #8dc6ff;
+
+    --art-btn-bg-color: grey;
+    --art-btn-txt-color: white;
+    --btn-bg-color: #22313f;
+    --btn-txt-color: white;
+    --btn-bg-hover-color: white;
+    --btn-txt-hover-color: #22313f;
+
+    --footer-bg-color: #8dc6ff;
+    --footer-first-txt-color: #22313f;;
+    --footer-txt-color: black;
+
+    --shadow-color: black;
+    --blanco: white;
 }
 
 html{
@@ -21,23 +55,28 @@ body{
 
 nav{
     background-color: var(--nav-bg-color);
-    
+    flex-direction: column;
+    grid-area: nav;
 }
 
 .menu{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     list-style: none;
     margin: 0;
     width: 100%;
     justify-content: space-evenly;
     padding-left: 0;
+    justify-content: center;
+    text-align: center;
 }
 
 .menu > li{
     color: var(--nav-font-color);
     position: relative;
     padding: 1rem 1rem ;
+    justify-content: center;
+    text-align: center;
 }
 
 .submenu{
@@ -52,29 +91,32 @@ nav{
     flex-direction: column;
     justify-content: center;
     margin-top: 3rem;
+    z-index: 1;
 }
 
 .submenu > li{
     display: inline-block;
-    background-color: var(--nav-bg-color); 
+    background-color: var(--nav-sub-bg-color);
     padding: 1rem 1rem ;
 }
 
 .submenu > li:first-child{
-margin-top: 1rem;
+    margin-top: 1rem;
 }
 
 .menu > li:hover > .submenu{
     display:flex;
-} 
+}
 
 .menu li:hover{
     background-color: var(--nav-bg-hover-color);
-} 
+}
 
 .submenu:hover {
     display: flex;
-} 
+    background-color: var(--nav-sub-bg-hover-color);
+    color: var(--nav-sub-font-color);
+}
 
 
 .imageGallery{
@@ -82,6 +124,7 @@ margin-top: 1rem;
     grid-template-columns: 1fr 6fr 1fr;
     width: 40%;
     margin: 2rem 30%;
+    grid-area: photo;
 }
 
 img{
@@ -89,7 +132,7 @@ img{
 }
 
 .galleryArrows{
-    background-color: white;
+    background-color: var(--arrow-bg-color);
 }
 
 #previousImage{
@@ -108,7 +151,7 @@ img{
 
 #UpButton{
     /* background-image: url(../icon/arrow-right-wide-line.svg); */
-    background-color: #22313f;
+    background-color: var(--up-btn-bg-color);
     width: 4rem;
     height: 4rem;
     background-repeat: no-repeat;
@@ -120,17 +163,17 @@ img{
 }
 
 #UpButton:hover {
-    -webkit-animation: rotate 1s ease-in forwards; 
+    -webkit-animation: rotate 1s ease-in forwards;
     animation: rotate 1s ease-in forwards;
 }
 
 @-webkit-keyframes rotate {
     0% {
-        -webkit-transform: rotate(0deg) scale(1.2); 
+        -webkit-transform: rotate(0deg) scale(1.2);
         transform: rotate(0deg) scale(1.2);
     }
     100% {
-        -webkit-transform: rotate(360deg) scale(1.2); 
+        -webkit-transform: rotate(360deg) scale(1.2);
         transform: rotate(360deg) scale(1.2);
     }
 }
@@ -144,12 +187,9 @@ img{
     }
 }
 
-#loginUserButton{
-    width: 4rem;
-    margin: 2rem;
-}
-
-#homeButton{
+#loginUserButton,
+#homeButton,
+#logoutButton{
     width: 4rem;
     margin: 2rem;
 }
@@ -159,15 +199,247 @@ header{
     grid-template-columns: auto 1fr auto;
     align-items: center;
     background-color: var(--header-bg-color);
-    color: var(--nav-bg-color);
+    color: var(--header-txt-color);
     text-align: center;
     padding: 1rem 0;
+    grid-area: top;
 }
 
+/*--------SECTION--------*/
+
+section {
+    grid-area: arti;
+    flex-direction: column;
+    padding: 1em;
+    justify-content: space-evenly;
+}
+
+section > div {
+    /*width: 100%;*/
+    margin: 1em;
+    padding: 1em;
+    text-align: center;
+}
+
+article{
+    display: grid;
+
+    grid-template-areas:
+        "art-foto"
+        "art-texto"
+        "art-footer";
+}
+
+.art {
+    /*width: calc(100%);*/
+    box-shadow: var(--shadow);
+    position: relative;
+}
+
+.art:hover{
+    box-shadow: var(--shadow-hover);
+}
+
+article > h2 {
+    position: absolute;
+    top: 1em;
+    right: 0;
+    background-color: var(--art-bg-color);
+    color: var(--art-title-color);
+    border-top-left-radius: 1em;
+    border-bottom-left-radius: 1em;
+    padding: 0.5em;
+}
+
+article > h2:hover{
+    padding-right: 10%;
+}
+
+.tab-text {
+    margin-top: -1px;
+    background-color: var(--art-tab-bg-color);
+    padding: 1em;
+    display: grid;
+    grid-template-columns: repeat(var(--n-of-columns), 1fr);
+    grid-gap: 1em;
+}
+
+.art-btn {
+    position: absolute;
+    top: 0;
+    left: 0;
+    border: none;
+    background-color: var(--art-btn-bg-color);
+    color: var(--art-btn-txt-color);
+    border-bottom-right-radius: 2em;
+    padding: 1.5em;
+}
+
+.art-img{
+    grid-area: art-foto;
+}
+
+img {
+    width: 100%;
+}
+
+.art > p {
+    margin: 1em;
+    grid-area: art-texto;
+}
+
+.btn {
+    box-sizing: border-box;
+    width: calc(33% - 1em);
+    padding: 0.5em;
+    background-color: var(--btn-bg-color);
+    color: var(--btn-txt-color);
+    border: none;
+    box-shadow: var(--shadow);
+    border-radius: 0.5em;
+}
+
+.btn:hover{
+    background-color: var(--btn-bg-hover-color);
+    color: var(--btn-txt-hover-color);
+}
+
+.title-inside {
+    grid-column: span var(--n-of-columns);
+    padding: 0.5em;
+}
+
+p + footer {
+    background-color: var(--art-footer-bg-color);
+    text-align: end;
+    font-weight: bold;
+    color: var(--blanco);
+    padding: 0.5em;
+    grid-area: art-footer;
+}
+
+/*--------FOOTER--------*/
+
+footer{
+    background-color: var(--footer-bg-color);
+    color: var(--footer-txt-color);
+    padding: 2%;
+    /*width: 100%;*/
+    text-align: center;
+    margin-bottom: 0;
+    flex-direction: column;
+    grid-area: bottom;
+}
+
+footer>*{
+    display: inline;
+    margin: 1%;
+}
+
+footer :first-child{
+    font-weight: bold;
+    color: var(--footer-first-txt-color);
+}
+
+#end-footer p{
+    white-space: nowrap;
+}
+
+#end-footer p+p {
+    white-space: nowrap; /* Evita que los nombres se dividan */
+    margin-right: 10px; /* Añade espacio entre los nombres si lo deseas */
+}
+
+.hide{
+    display: none
+}
+
+/*--------------------------Media Query---------------------------*/
+
+@media (min-width: 768px){ /*TAMAÑO PEQUEÑO*/
+
+    nav, .menu, .submenu {
+        flex-direction: column;
+        justify-content: start;
+    }
+
+    body {
+        grid-template-areas:
+        "top top"
+        "nav arti"
+        "bottom bottom";
+
+        grid-template-columns: auto 1fr;
+    }
+
+    :root {
+        --n-of-columns: 1;
+    }
+
+    .imageGallery{
+        display: none;
+    }
+
+}
+
+@media (min-width: 1024px){ /*TAMAÑO MEDIANO*/
+
+    body {
+        grid-template-areas:
+        "top"
+        "nav"
+        "photo"
+        "arti"
+        "bottom";
+
+        grid-template-columns: 1fr auto;
+    }
+
+    nav, .menu{
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    :root {
+        --n-of-columns: 1;
+    }
+
+}
+
+@media (min-width: 1280px){ /*TAMAÑO COMPLETO*/
 
 
+    body {
+        grid-template-areas:
+        "top"
+        "nav"
+        "photo"
+        "arti"
+        "bottom";
+    }
 
+    nav, .menu {
+        flex-direction: row;
+        justify-content: center;
+    }
 
+    :root {
+        --n-of-columns: 3;
+    }
 
+    /* header {
+          position: sticky;
+          top: 0;
+          z-index: 1000; *//* Ajusta según sea necesario */
+    /* }*/
 
-
+    .imageGallery{
+        position: relative;
+        display: grid;/*
+        top: 0;
+        left: 0;
+        z-index: 1;
+        width: 100%; Para que abarque todo el ancho de la pantalla */
+        /* Otras propiedades de estilo según sea necesario */
+    }
+}

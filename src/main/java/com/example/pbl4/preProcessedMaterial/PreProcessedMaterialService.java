@@ -1,5 +1,6 @@
 package com.example.pbl4.preProcessedMaterial;
 
+import com.example.pbl4.employee.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -36,5 +37,14 @@ public class PreProcessedMaterialService {
             throw new IllegalStateException("No existe un PreProcessedMaterial con esa id");
         }
         preProcessedMaterialRepository.deleteById(id);
+    }
+
+    public void updatePreProcessedMaterial(PreProcessedMaterial updatedPreProcessedMaterial) {
+        PreProcessedMaterial existingPreProcessedMaterial = findPreProcessedMaterialById(updatedPreProcessedMaterial.getId());
+
+        existingPreProcessedMaterial.setQuantity(updatedPreProcessedMaterial.getQuantity());
+        existingPreProcessedMaterial.setType(updatedPreProcessedMaterial.getType());
+
+        preProcessedMaterialRepository.save(existingPreProcessedMaterial);
     }
 }

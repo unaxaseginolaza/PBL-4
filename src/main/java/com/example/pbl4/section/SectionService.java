@@ -1,13 +1,11 @@
 package com.example.pbl4.section;
 
 
-import com.example.pbl4.section.Section;
-import com.example.pbl4.section.SectionRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
@@ -29,6 +27,10 @@ public class SectionService {
         return sectionRepository.findById(id).orElseThrow(() -> new IllegalStateException("Section not found"));
     }
 
+    public List<Section> getAllSections() {
+        return sectionRepository.findAll();
+    }
+
     public void newSection(Section section) {
         Optional<Section> res = sectionRepository.findSectionByName(section.getName());
         if (res.isPresent() && section.getId() == null) {
@@ -43,5 +45,14 @@ public class SectionService {
             throw new IllegalStateException("No existe un Section con esa id");
         }
         sectionRepository.deleteById(id);
+    }
+
+    public void updateSection(Section updatedSection) {
+        Section existingSection = findSectionById(updatedSection.getId());
+
+        existingSection.setName(updatedSection.getName());
+        existingSection.setBossEmployee(updatedSection.getBossEmployee());
+
+        sectionRepository.save(existingSection);
     }
 }

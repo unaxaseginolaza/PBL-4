@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{template}" lang="eu">
+<head>
+    <link rel="stylesheet" href="/css/list.css">
+    <title>ProcessedMaterial Form</title>
+</head>
+<body>
+<main layout:fragment="custom-main">
+    <h2 th:text="${processedMaterial.id != null} ? 'Edit ProcessedMaterial' : 'Create ProcessedMaterial'"></h2>
+    <form th:action="${processedMaterial.id != null} ? @{/processedMaterial/update} : @{/processedMaterial/create}" th:object="${processedMaterial}" method="post" class="Form">
+        <input type="hidden" th:if="${processedMaterial.id != null}" th:field="*{id}">
+        <label for="quantity">Cantidad:</label>
+        <input type="number" id="quantity" name="quantity" th:field="*{quantity}" step="0.01" required>
+        <label for="preProcessedMaterialId">PreProcessedMaterial (ID):</label>
+        <select id="preProcessedMaterialId" name="preProcessedMaterialId" th:field="*{preProcessedMaterial.id}" required>
+            <option th:each="preProcessedMaterial : ${preProcessedMaterials}" th:value="${preProcessedMaterial.id}" th:text="${preProcessedMaterial.type.name}"></option>
+        </select>
+        <button type="submit" th:text="${processedMaterial.id != null} ? 'Update' : 'Create'"></button>
+    </form>
+</main>
+</body>
+</html>

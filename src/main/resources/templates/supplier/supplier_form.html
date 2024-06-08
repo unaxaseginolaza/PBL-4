@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{template}" lang="eu">
+<head>
+    <link rel="stylesheet" href="/css/list.css">
+    <title>Supplier Form</title>
+</head>
+<body>
+<main layout:fragment="custom-main">
+    <h2 th:text="${supplier.id != null} ? 'Edit Supplier' : 'Create Supplier'"></h2>
+    <form th:action="${supplier.id != null} ? @{/supplier/update} : @{/supplier/create}" th:object="${supplier}" method="post" class="Form">
+        <input type="hidden" th:if="${supplier.id != null}" th:field="*{id}">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" th:field="*{name}" required>
+        <label for="direction">Direccion:</label>
+        <input type="text" id="direction" name="direction" th:field="*{direction}" required>
+        <button type="submit" th:text="${supplier.id != null} ? 'Update' : 'Create'"></button>
+    </form>
+</main>
+</body>
+</html>
+</html>

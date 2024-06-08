@@ -18,6 +18,7 @@ public class UserController {
         this.userService = userService;
     }
 
+    // Muestra la lista de usuarios, empleados y clientes
     @GetMapping
     public String getUsers(Model model) {
         List<User> users = userService.getUsers();
@@ -25,31 +26,10 @@ public class UserController {
         return "user/list"; // Retorna la vista user/list.html
     }
 
-    /*@GetMapping("/new")
-    public String createUserForm(Model model) {
-        model.addAttribute("user", new User());
-        return "user/new"; // Retorna la vista user/new.html
-    }
+    //No he puesto el create y update por que solo se podra crear y actualizar un employee o un client pero no un user
 
-    @PostMapping
-    public String createUser(@ModelAttribute User user, Model model) {
-        userService.newUser(user);
-        return "redirect:/user"; // Redirige a la lista de clientes
-    }
 
-    @GetMapping("/edit/{id}")
-    public String updateUserForm(@PathVariable("id") Long id, Model model) {
-        User user = userService.findUserById(id); // Asumiendo que tienes un método para buscar por ID
-        model.addAttribute("user", user);
-        return "user/edit"; // Retorna la vista user/edit.html
-    }
-
-    @PostMapping("/update")
-    public String updateUser(@ModelAttribute User user, Model model) {
-        userService.newUser(user);
-        return "redirect:/user"; // Redirige a la lista de clientes
-    }*/
-
+    // Elimina un usuario indiferentemente si es empleado o cliente
     @PostMapping("/delete/{id}")
     public String deleteUser(@PathVariable("id") Long id) {
         userService.deleteUser(id);

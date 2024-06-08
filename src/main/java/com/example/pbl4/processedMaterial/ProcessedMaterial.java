@@ -13,7 +13,9 @@ public class ProcessedMaterial {
 
     private float quantity;
 
-    @ManyToOne
+    private float precioKg;
+
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "preProcessedMaterial_id")
     private PreProcessedMaterial preProcessedMaterial;
 

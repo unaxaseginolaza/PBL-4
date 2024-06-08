@@ -1,13 +1,8 @@
 package com.example.pbl4.supplier;
 
-import com.example.pbl4.supplier.Supplier;
-import com.example.pbl4.supplier.SupplierRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,6 +23,10 @@ public class SupplierService {
         return supplierRepository.findById(id).orElseThrow(() -> new IllegalStateException("Supplier not found"));
     }
 
+    public List<Supplier> getAllSuppliers() {
+        return supplierRepository.findAll();
+    }
+
     public void newSupplier(Supplier supplier) {
         Optional<Supplier> res = supplierRepository.findSupplierByName(supplier.getName());
         if (res.isPresent() && supplier.getId() == null) {
@@ -42,5 +41,15 @@ public class SupplierService {
             throw new IllegalStateException("No existe un Supplier con esa id");
         }
         supplierRepository.deleteById(id);
+    }
+
+
+    public void updateSupplier(Supplier updatedSupplier) {
+        Supplier existingSupplier = findSupplierById(updatedSupplier.getId());
+
+        existingSupplier.setName(updatedSupplier.getName());
+        existingSupplier.setDirection(updatedSupplier.getDirection());
+
+        supplierRepository.save(existingSupplier);
     }
 }

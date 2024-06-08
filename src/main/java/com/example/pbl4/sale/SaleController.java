@@ -21,7 +21,7 @@ public class SaleController {
     public String getSales(Model model) {
         List<Sale> sales = saleService.getSales();
         model.addAttribute("sales", sales);
-        return "sale/list"; // Retorna la vista sale/list.html
+        return "sale/sale_list"; // Retorna la vista sale/list.html
     }
 
     @GetMapping("/new")
@@ -36,12 +36,12 @@ public class SaleController {
         return "redirect:/sale"; // Redirige a la lista de clientes
     }
 
-    @GetMapping("/edit/{id}")
+    /*@GetMapping("/edit/{id}")
     public String updateSaleForm(@PathVariable("id") Long id, Model model) {
         Sale sale = saleService.findSaleById(id); // Asumiendo que tienes un método para buscar por ID
         model.addAttribute("sale", sale);
         return "sale/edit"; // Retorna la vista sale/edit.html
-    }
+    }*/
 
     @PostMapping("/update")
     public String updateSale(@ModelAttribute Sale sale, Model model) {

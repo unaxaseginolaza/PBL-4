@@ -1,0 +1,173 @@
+:root{
+    font-family:"Open Sans", sans-serif;
+    font-size: 16px;
+
+    --n-of-columns: 1;
+
+    --shadow: 0 0 0.5em 0 var(--negro);
+    --shadow-hover: 0 0 0.3em 0 var(--negro);
+
+    --header-bg-color: #8dc6ff;
+    --nav-font-color: white;
+    --nav-bg-color:#22313f;
+    --nav-bg-hover-color: #18272F;
+    --last-color: #34495e;
+    --art-btn-color: grey;
+
+    --negro: black;
+    --white: white;
+
+    /*-------------Estos cambios si----------------*/
+    --tb-bg-color: rgb(252, 251, 251);
+    --td-btm-color: #ddd;
+    --td-bg-hover-color: #e3e2e2; /*f2f2f2*/
+    --td-btn-create-color: #4CAF50;
+    --td-btn-create-hover-color: #45a049;
+    --td-btn-delete-color: #de5a5a;
+    --td-btn-delete-hover-color: #be4545;
+
+    --th-bg-color: #8dc6ff;
+    --th-txt-color: white;
+
+    --list-btn-txt-color: white;
+    --form-btn-txt-color: white;
+    /*---------------Hasta aqui-----------------*/
+}
+
+/*GENERALES*/
+h1,h2,p{
+    text-align: center;
+}
+
+/*ESPECIFICOS CREATE*/
+.List {
+    margin: 20px;
+}
+
+.List h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.List table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: var(--tb-bg-color);
+}
+
+.List th,
+.List td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid var(--td-btm-color);
+}
+
+.List th {
+    background-color: var(--th-bg-color);
+    color: var(--th-txt-color);
+}
+
+.List tbody tr:hover {
+    background-color: var(--td-bg-hover-color);
+}
+
+.List button {
+    padding: 5px 10px;
+    color: var(--list-btn-txt-color);
+    border: none;
+    cursor: pointer;
+}
+
+.List .update-btn{
+    background-color: var(--td-btn-create-color);
+}
+
+.List .update-btn:hover {
+    background-color: var(--td-btn-create-hover-color);
+}
+
+.List .delete-btn{
+    background-color: var(--td-btn-delete-color);
+}
+
+.List .delete-btn:hover {
+    background-color: var(--td-btn-delete-hover-color);
+}
+
+.List form {
+    display: inline;
+    margin: 0;
+}
+
+/*ESPECIFICOS LIST*/ /*(Mismos parametros que Update)*/
+
+.Form {
+    margin: 2% auto; /* Margen de 2% en la parte superior e inferior y centrado horizontalmente */
+    width: 400px; /* Ancho fijo de 400 píxeles */
+    text-align: center;
+    position: relative;
+    padding-bottom: 50px; /* Espacio para el botón, 50 píxeles */
+}
+
+.Form h2 {
+    font-size: 1em; /* Tamaño de fuente de 24 píxeles */
+    margin-bottom: 5%; /* Margen inferior de 20 píxeles */
+}
+
+.Form form {
+    text-align: left;
+}
+
+.Form label {
+    display: block;
+    margin-bottom: 2%; /* Margen inferior de 10 píxeles */
+}
+
+.Form input[type="text"],
+.Form input[type="password"],
+.Form input[type="number"],
+.Form input[type="date"],
+.Form select{
+    width: 380px; /* Ancho de entrada de 380 píxeles */
+    padding: 10px; /* Relleno de 10 píxeles */
+    margin-bottom: 20px; /* Margen inferior de 20 píxeles */
+}
+
+.Form div {
+    margin-bottom: 20px; /* Margen inferior de 20 píxeles */
+}
+
+.Form button {
+    padding: 10px 20px; /* Relleno de 10 píxeles en vertical y 20 píxeles en horizontal */
+    background-color: var(--td-btn-create-color);
+    color: var(--form-btn-txt-color);
+    border: none;
+    cursor: pointer;
+    position: absolute;
+    bottom: 20px; /* Distancia de 20 píxeles desde la parte inferior */
+    right: 2%; /* Distancia de 20 píxeles desde la parte derecha */
+}
+
+.Form button:hover {
+    background-color: var(--td-btn-create-hover-color);
+}
+
+/* --------------------------------------- Puntuales --------------------------------------- */
+
+
+#error{
+    background-color: rgb(228, 86, 86);
+}
+
+#welcome{
+    background-color: rgb(150, 228, 150);
+}
+
+.msg-p{
+    text-align: center;
+    display: none
+}
+
+footer{
+    margin-top: 2%;;
+}

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{template}" lang="eu">
+<head>
+    <link rel="stylesheet" href="/css/list.css">
+    <title>Type Form</title>
+</head>
+<body>
+<main layout:fragment="custom-main">
+    <h2 th:text="${type.id != null} ? 'Edit Type' : 'Create Type'"></h2>
+    <form th:action="${type.id != null} ? @{/type/update} : @{/type/create}" th:object="${type}" method="post" class="Form">
+        <input type="hidden" th:if="${type.id != null}" th:field="*{id}">
+        <label for="name">Nombre:</label>
+        <input type="text" id="name" name="name" th:field="*{name}" required>
+        <label for="description">Descripcion:</label>
+        <input type="text" id="description" name="description" th:field="*{description}" required>
+        <button type="submit" th:text="${type.id != null} ? 'Update' : 'Create'"></button>
+    </form>
+</main>
+</body>
+</html>

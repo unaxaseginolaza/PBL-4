@@ -37,4 +37,13 @@ public class ProcessedMaterialService {
         }
         processedMaterialRepository.deleteById(id);
     }
+
+    public void updateProcessedMaterial(ProcessedMaterial updatedProcessedMaterial) {
+        ProcessedMaterial existingProcessedMaterial = findProcessedMaterialById(updatedProcessedMaterial.getId());
+
+        existingProcessedMaterial.setQuantity(updatedProcessedMaterial.getQuantity());
+        existingProcessedMaterial.setPreProcessedMaterial(updatedProcessedMaterial.getPreProcessedMaterial()); // En este punto, la contraseña ya debería estar codificada
+
+        processedMaterialRepository.save(existingProcessedMaterial);
+    }
 }

@@ -1,6 +1,7 @@
 package com.example.pbl4.preProcessedMaterial;
 
 
+import com.example.pbl4.processedMaterial.ProcessedMaterial;
 import com.example.pbl4.type.Type;
 import jakarta.persistence.*;
 
@@ -14,8 +15,8 @@ public class PreProcessedMaterial {
 
     private float quantity;
 
-    @ManyToOne
-    @JoinColumn(name = "material_type_id", nullable = false)
+    @OneToOne(orphanRemoval = true, cascade = CascadeType.ALL)
+    @JoinColumn(name = "material_type_id", nullable = false, unique = true)
     private Type type;
 
     public Long getId() {

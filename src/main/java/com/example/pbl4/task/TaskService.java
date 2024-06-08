@@ -1,6 +1,7 @@
 package com.example.pbl4.task;
 
 import com.example.pbl4.task.Task;
+import com.example.pbl4.task.Task;
 import com.example.pbl4.task.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,5 +40,18 @@ public class TaskService {
             throw new IllegalStateException("No existe un Task con esa id");
         }
         taskRepository.deleteById(id);
+    }
+
+    public void updateTask(Task updatedTask) {
+        Task existingTask = findTaskById(updatedTask.getId());
+
+        existingTask.setTitle(updatedTask.getTitle());
+        existingTask.setSummary(updatedTask.getSummary());
+        existingTask.setCreator(updatedTask.getCreator());
+        existingTask.setInCharge(updatedTask.getInCharge());
+        existingTask.setPreProcessedMaterial(updatedTask.getPreProcessedMaterial());
+        existingTask.setProcessedMaterial(updatedTask.getProcessedMaterial());
+
+        taskRepository.save(existingTask);
     }
 }

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{template}" lang="eu">
+<head>
+    <link rel="stylesheet" href="/css/list.css">
+    <title>Section Form</title>
+</head>
+<body>
+<main layout:fragment="custom-main">
+    <h2 th:text="${section.id != null} ? 'Edit Section' : 'Create Section'"></h2>
+    <form th:action="${section.id != null} ? @{/section/update} : @{/section/create}" th:object="${section}" method="post" class="Form">
+        <input type="hidden" th:if="${section.id != null}" th:field="*{id}">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" th:field="*{name}" required>
+        <label for="bossEmployee">BossSection (ID):</label>
+        <select id="bossEmployee" name="bossEmployee" th:field="*{bossEmployee}">
+            <option th:each="bossEmployee : ${bossEmployees}" th:value="${bossEmployee.id}" th:text="${bossEmployee.name}"></option>
+        </select>
+        <button type="submit" th:text="${section.id != null} ? 'Update' : 'Create'"></button>
+    </form>
+</main>
+</body>
+</html>

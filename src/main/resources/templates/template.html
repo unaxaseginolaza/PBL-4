@@ -9,9 +9,20 @@
     <body>
         <header layout:fragment="custom-header">
             <a href="/"><img src="/icon/home-line.svg" alt="home" id="homeButton"></a>
-            <h1>Nire Web</h1>
-            <a href="/login"><img src="/icon/user-line.svg" alt="user" id="loginUserButton"></a>
-            <a href="/logout"><img src="/icon/logout-line.svg" alt="logout" id="logoutButton"></a>
+            <h1>EcoPlastic</h1>
+            <!-- Verifica si el usuario está autenticado -->
+            <th:block th:if="${session.userLogin != null}">
+                <!-- Botón de cierre de sesión -->
+                <a href="/logout">
+                    <img src="/icon/logout-box-r-line.svg" alt="logout" id="logoutButton">
+                </a>
+            </th:block>
+            <th:block th:unless="${session.userLogin != null}">
+                <!-- Botón de inicio de sesión -->
+                <a href="/login">
+                    <img src="/icon/user-line.svg" alt="user" id="loginUserButton">
+                </a>
+            </th:block>
         </header>
         <nav layout:fragment="custom-nav">
             <ul class="menu">
@@ -33,6 +44,8 @@
                 <li>menu 4</li>
             </ul>
         </nav>
+        <p th:text="${session.error}"></p>
+        <p th:text="${message}"></p>
         <main layout:fragment="custom-main">
             <!-- Contenido principal predeterminado -->
 

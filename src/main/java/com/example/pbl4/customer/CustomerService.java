@@ -2,6 +2,7 @@ package com.example.pbl4.customer;
 
 import com.example.pbl4.customer.Customer;
 import com.example.pbl4.customer.CustomerRepository;
+import com.example.pbl4.employee.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -43,5 +44,16 @@ public class CustomerService {
             throw new IllegalStateException("No existe un Customer con esa id");
         }
         customerRepository.deleteById(id);
+    }
+
+    public void updateCustomer(Customer updatedCustomer) {
+        Customer existingCustomer = findCustomerById(updatedCustomer.getId());
+
+        existingCustomer.setUsername(updatedCustomer.getUsername());
+        existingCustomer.setPassword(updatedCustomer.getPassword()); // En este punto, la contraseña ya debería estar codificada
+        existingCustomer.setRol(updatedCustomer.getRol());
+        existingCustomer.setCompanyName(updatedCustomer.getCompanyName());
+
+        customerRepository.save(existingCustomer);
     }
 }
