@@ -1,15 +1,13 @@
 <!DOCTYPE html>
 <html lang="eu" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{template}">
 	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<script src="script/user_form.js"></script>
 		<link rel="stylesheet" href="/css/index.css">
 		<title>Nire Web - User Form</title>
-		<link rel="stylesheet" href="/css/login.css">
+		<link rel="stylesheet" href="/css/list.css">
 	</head>
 	<body>
-		<main class="userForm" layout:fragment="custom-main">
+		<main class="Form" layout:fragment="custom-main">
 			<form action="/login" method="post">
 				<label>
 					<input type="text" name="username" value="" placeholder=""/>

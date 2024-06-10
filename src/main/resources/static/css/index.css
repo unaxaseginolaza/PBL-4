@@ -28,6 +28,7 @@
     --art-title-color: white;
     --art-tab-bg-color: white;
     --art-footer-bg-color: #8dc6ff;
+    --art-footer-txt-color: white;
 
     --art-btn-bg-color: grey;
     --art-btn-txt-color: white;
@@ -41,22 +42,35 @@
     --footer-txt-color: black;
 
     --shadow-color: black;
-    --blanco: white;
 }
 
-html{
+html, body{
+    height: 100%;
     margin: 0;
 }
 
 body{
-    margin: 0;
+    display: flex;
+    flex-direction: column;
     position: relative;
 }
 
-nav{
+main{
+    flex: 1;
+}
+
+nav, nav>*{
     background-color: var(--nav-bg-color);
     flex-direction: column;
     grid-area: nav;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-div>* {
+    color: var(--nav-font-color);
+    margin: 0;
+    padding: 0;
 }
 
 .menu{
@@ -187,9 +201,12 @@ img{
     }
 }
 
-#loginUserButton,
-#homeButton,
-#logoutButton{
+#loginUserButton{
+    width: 4rem;
+    margin: 2rem;
+}
+
+#homeButton{
     width: 4rem;
     margin: 2rem;
 }
@@ -238,6 +255,8 @@ article{
 
 .art:hover{
     box-shadow: var(--shadow-hover);
+    transform: translateY(-10px); /* Agregar desplazamiento hacia arriba */
+    transition: transform 0.5s ease-in-out; /* Agregar transición para suavizar el efecto */
 }
 
 article > h2 {
@@ -313,47 +332,74 @@ p + footer {
     background-color: var(--art-footer-bg-color);
     text-align: end;
     font-weight: bold;
-    color: var(--blanco);
+    color: var(--art-footer-txt-color);
     padding: 0.5em;
     grid-area: art-footer;
 }
 
 /*--------FOOTER--------*/
 
-footer{
-    background-color: var(--footer-bg-color);
-    color: var(--footer-txt-color);
-    padding: 2%;
-    /*width: 100%;*/
-    text-align: center;
-    margin-bottom: 0;
-    flex-direction: column;
-    grid-area: bottom;
-}
-
-footer>*{
+.footer-content>*{
     display: inline;
     margin: 1%;
 }
 
-footer :first-child{
+.footer-content :first-child{
     font-weight: bold;
     color: var(--footer-first-txt-color);
 }
 
-#end-footer p{
+.footer-content p{
     white-space: nowrap;
 }
 
-#end-footer p+p {
-    white-space: nowrap; /* Evita que los nombres se dividan */
-    margin-right: 10px; /* Añade espacio entre los nombres si lo deseas */
+.footer-content p+p {
+    white-space: nowrap;
+    margin-right: 10px;
 }
 
 .hide{
     display: none
 }
 
+footer{
+    background-color: var(--footer-bg-color);
+    color: var(--footer-txt-color);
+    padding: 2%;
+    width: 100%;
+    margin-bottom: 0;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.footer-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+/*--------------------------Card Animation------------------------*/
+/*
+.art .info {
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    background: linear-gradient(to bottom, rgba(0,176,155,0.5), rgba(150,201,61,1));
+    padding: 1em;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    color: #fff;
+    box-sizing: border-box;
+}
+
+.art:hover .info {
+    opacity: 1;
+    transform: translateY(0px);
+}
+*/
 /*--------------------------Media Query---------------------------*/
 
 @media (min-width: 768px){ /*TAMAÑO PEQUEÑO*/
@@ -442,4 +488,9 @@ footer :first-child{
         width: 100%; Para que abarque todo el ancho de la pantalla */
         /* Otras propiedades de estilo según sea necesario */
     }
+}
+
+nav, .navbar, .navbar-expand-lg, .bg-light{
+    background-color: var(--nav-bg-color);
+    padding: 0;
 }

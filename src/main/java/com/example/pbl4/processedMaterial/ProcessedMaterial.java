@@ -43,17 +43,27 @@ public class ProcessedMaterial {
         this.preProcessedMaterial = preProcessedMaterial;
     }
 
+    public float getPrecioKg() {
+        return precioKg;
+    }
+
+    public void setPrecioKg(float precioKg) {
+        this.precioKg = precioKg;
+    }
+
     public ProcessedMaterial() {
     }
 
-    public ProcessedMaterial(Long id, float quantity, PreProcessedMaterial preProcessedMaterial) {
+    public ProcessedMaterial(Long id, float quantity, PreProcessedMaterial preProcessedMaterial, float precioKg) {
         this.id = id;
         this.quantity = quantity;
         this.preProcessedMaterial = preProcessedMaterial;
+        this.precioKg = precioKg;
     }
 
-    public ProcessedMaterial(float quantity, PreProcessedMaterial preProcessedMaterial) {
+    public ProcessedMaterial(float quantity, PreProcessedMaterial preProcessedMaterial, float precioKg) {
         this.quantity = quantity;
         this.preProcessedMaterial = preProcessedMaterial;
+        this.precioKg = precioKg;
     }
 }

@@ -33,11 +33,11 @@ public class CustomerController {
     @PostMapping("/create")
     public String createCustomer(@RequestParam("username") String username,
                                  @RequestParam("password") String password,
-                                 @RequestParam("rol") Rol rol,
                                  @RequestParam("companyName") String companyName,
                                  Model model) {
 
         Customer customer = new Customer();
+        Rol rol = Rol.CUSTOMER;
         customer.setUsername(username);
         customer.setPassword(passwordEncoder.encode(password));
         customer.setRol(rol);

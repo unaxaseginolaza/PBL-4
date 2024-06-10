@@ -11,6 +11,7 @@
         <thead>
         <tr>
             <th>Quantity</th>
+            <th>PricePerKG</th>
             <th>TypeId</th>
             <th>Actions</th>
         </tr>
@@ -19,6 +20,7 @@
         <tr th:each="processedMaterial : ${processedMaterials}">
             <td th:text="${processedMaterial.quantity}"></td>
             <td th:text="${processedMaterial.preProcessedMaterial.type.name}"></td>
+            <td th:text="${processedMaterial.precioKg}"></td>
             <td>
                 <form th:action="@{/processedMaterial/edit/{id}(id=${processedMaterial.id})}" method="get">
                     <button type="submit" class="update-btn">Update</button>

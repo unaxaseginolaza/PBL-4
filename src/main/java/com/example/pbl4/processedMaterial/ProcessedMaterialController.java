@@ -36,6 +36,13 @@ public class ProcessedMaterialController {
         if (preProcessedMaterialId != null) {
             PreProcessedMaterial preProcessedMaterial = preProcessedMaterialService.findPreProcessedMaterialById(preProcessedMaterialId);
             processedMaterial.setPreProcessedMaterial(preProcessedMaterial);
+            if (preProcessedMaterial.getQuantity() - processedMaterial.getQuantity() >= 0){
+                preProcessedMaterial.setQuantity(preProcessedMaterial.getQuantity() - processedMaterial.getQuantity());
+                preProcessedMaterialService.updatePreProcessedMaterial(preProcessedMaterial);
+            }else {
+                return "redirect:/processedMaterial/form";
+            }
+
         }
 
         // Guardar el nuevo empleado

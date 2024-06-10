@@ -15,10 +15,6 @@
             <label for="password">Password:</label>
             <input type="password" id="password" name="password" th:field="*{password}" required>
         </div>
-        <label for="rol">Rol:</label>
-        <select id="rol" name="rol" th:field="*{rol}" required>
-            <option th:each="role : ${roles}" th:value="${role}" th:text="${role}">Role</option>
-        </select>
         <label for="companyName">companyName:</label>
         <input type="text" id="companyName" name="companyName" th:field="*{companyName}" required>
         <button type="submit" th:text="${customer.id != null} ? 'Update' : 'Create'"></button>

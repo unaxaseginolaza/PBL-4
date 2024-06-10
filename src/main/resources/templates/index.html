@@ -1,8 +1,6 @@
 <!DOCTYPE html>
-<html lang="eu" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{template}">
+<html lang="es" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{template}">
     <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Nire Web</title>
         <link rel="stylesheet" href="/css/index.css">
         <script src="/script/index.js"></script>
@@ -16,6 +14,318 @@
                 <button type="button" id="nextImage" class="galleryArrows">
                 </button>
             </div>
+
+            <section>
+                <div class="tab-text wrapper" id="tab-1">
+                    <h2 class="title-inside">EMPLEADOS</h2>
+
+                    <article class="art Sec-sec" >
+                        <img src="/image/paisaje1.jpg" class="art-img" alt="anadir-emp">
+                        <button id="btn-1" class="art-btn hide">-</button>
+                        <h2>Añadir</h2>
+
+                        <p class="info">Crear nuevos usuarios en el sistema</p>
+                    </article>
+
+                    <article class="art Sec-sec" >
+                        <img src="/image/paisaje2.jpg" class="art-img" alt="editar-emp">
+                        <button id="btn-2" class="art-btn hide">-</button>
+                        <h2>Editar</h2>
+
+                        <p class="info">Modificar datos de empleados previamente creados en el sistema</p>
+                    </article>
+
+                    <article class="art Sec-sec" >
+                        <img src="/image/paisaje3.jpg" class="art-image" alt="filtrar-emp">
+                        <button id="btn-3" class="art-btn hide">-</button>
+                        <h2>Buscar</h2>
+
+                        <p class="info">Filtrar mediante datos referentes a un empleado</p>
+                    </article>
+                </div>
+
+                <hr>
+
+                <div class="tab-text" id="tab-2" >
+
+                    <h2 class="title-inside">SECCIONES</h2>
+
+                    <article class="art Sec-sec">
+                        <img src="/image/paisaje1.jpg" class="art-img" alt="crear-sec">
+                        <button id="btn-4" class="art-btn hide">-</button>
+
+                        <h2>Crear</h2>
+
+                        <p>Crear una nueva sección en el sistema</p>
+                    </article>
+
+                    <article class="art Sec-sec">
+
+                        <img src="/image/paisaje2.jpg" class="art-img" alt="editar-sec">
+                        <button id="btn-5" class="art-btn hide">-</button>
+
+                        <h2>Editar</h2>
+
+                        <p>Editar una sección previamente creada en el sistema</p>
+
+                    </article>
+
+                    <article class="art Sec-sec">
+
+                        <img src="/image/paisaje3.jpg" class="art-img" alt="filtrar-sec">
+                        <button id="btn-6" class="art-btn hide">-</button>
+
+                        <h2>Buscar</h2>
+
+                        <p>Filtrar mediante los datos referentes a secciones</p>
+                    </article>
+                </div>
+
+                <hr>
+
+                <div class="tab-text" id="tab-3">
+
+                    <h2 class="title-inside">MATERIALES</h2>
+
+                    <article class="art Sec-mat">
+
+                        <img src="/image/paisaje1.jpg" class="art-img" alt="anadir-mat">
+                        <button id="btn-7" class="art-btn hide"></button>
+
+                        <h2>Crear</h2>
+
+                        <p>Crear datos sobre un nuevo material en el sistema</p>
+
+                    </article>
+
+                    <article class="art Sec-estadisticas">
+
+                        <img src="/image/paisaje2.jpg" class="art-img" alt="editar-mat">
+                        <button id="btn-8" class="art-btn hide">-</button>
+
+                        <h2>Editar</h2>
+
+                        <p>Editar datos de los materiales previamente creados en el sistema</p>
+
+                    </article>
+
+                    <article class="art Sec-mat">
+                        <img src="/image/paisaje3.jpg" class="art-img" alt="filtrar-mat">
+                        <button id="btn-9" class="art-btn hide">-</button>
+
+                        <h2>Buscar</h2>
+
+                        <p>Filtrar por datos de los materiales</p>
+                    </article>
+
+                    <article class="art Sec-mat">
+
+                        <img src="/image/paisaje1.jpg" class="art-img" alt="anadir-tip-mat">
+                        <button id="btn-10" class="art-btn hide"></button>
+
+                        <h2>Nuevo Tipo</h2>
+
+                        <p>Crear datos sobre un nuevo tipo de material</p>
+
+                    </article>
+
+                    <article class="art Sec-estadisticas">
+
+                        <img src="/image/paisaje2.jpg" class="art-img" alt="editar-tip-mat">
+                        <button id="btn-11" class="art-btn hide">-</button>
+
+                        <h2>Editar Tipos</h2>
+
+                        <p>Editar datos de un tipo de material previamente creado</p>
+
+                    </article>
+
+                    <article class="art Sec-mat">
+                        <img src="/image/paisaje3.jpg" class="art-img" alt="filtrar-tip-mat">
+                        <button id="btn-12" class="art-btn hide">-</button>
+
+                        <h2>Buscar Tipo</h2>
+
+                        <p>Filtrar por datos de los diferentes tipos de materiales</p>
+                    </article>
+                </div>
+
+                <div class="tab-text" id="tab-4">
+                    <h2 class="title-inside">COMPRAS</h2>
+
+                    <article class="art Sec-com" id="article-1">
+                        <img src="/image/paisaje1.jpg" class="art-img" alt="anadir-com">
+                        <button id="btn-13" class="art-btn hide">-</button>
+                        <h2>Añadir</h2>
+
+                        <p>Añadir datos de una nueva compra</p>
+
+                    </article>
+
+                    <article class="art Sec-com" id="article-2">
+                        <img src="/image/paisaje2.jpg" class="art-img" alt="editar-com">
+                        <button id="btn-14" class="art-btn hide">-</button>
+                        <h2>Editar</h2>
+
+                        <p>Modificar datos una compra previamente creada</p>
+                    </article>
+
+                    <article class="art Sec-emp" id="article-3">
+                        <img src="/image/paisaje3.jpg" class="art-image" alt="filtrar-emp">
+                        <button id="btn-15" class="art-btn hide">-</button>
+                        <h2>Buscar</h2>
+
+                        <p>Realizar busqueda entre los datos de compras realizadas</p>
+                    </article>
+                </div>
+
+                <hr>
+
+                <div class="tab-text" id="tab-5" >
+
+                    <h2 class="title-inside">VENTAS</h2>
+
+                    <article class="art Sec-ven">
+                        <img src="/image/paisaje1.jpg" class="art-img" alt="crear-ven">
+                        <button id="btn-16" class="art-btn hide">-</button>
+
+                        <h2>Crear</h2>
+
+                        <p>Crear datos para una nueva venta</p>
+                    </article>
+
+                    <article class="art Sec-sec">
+
+                        <img src="/image/paisaje2.jpg" class="art-img" alt="editar-sec">
+                        <button id="btn-17" class="art-btn hide">-</button>
+
+                        <h2>Editar</h2>
+
+                        <p>Editar los datos de una venta previamente creada</p>
+                    </article>
+
+                    <article class="art Sec-sec">
+
+                        <img src="/image/paisaje3.jpg" class="art-img" alt="filtrar-sec">
+                        <button id="btn-18" class="art-btn hide">-</button>
+
+                        <h2>Buscar</h2>
+
+                        <p>Realizar una busqueda entre los datos de ventas realizadas</p>
+                    </article>
+                </div>
+
+                <hr>
+
+                <div class="tab-text" id="tab-6">
+
+                    <h2 class="title-inside">TRANSACCIONES</h2>
+
+                    <article class="art Sec-tra">
+
+                        <img src="/image/paisaje1.jpg" class="art-img" alt="anadir-prov">
+                        <button id="btn-19" class="art-btn hide"></button>
+
+                        <h2>Proveedor</h2>
+
+                        <p>Crear y/o modificar datos sobre un proveedor</p>
+
+                    </article>
+
+                    <article class="art Sec-tra">
+
+                        <img src="/image/paisaje2.jpg" class="art-img" alt="anadir-rec">
+                        <button id="btn-20" class="art-btn hide">-</button>
+
+                        <h2>Receptor</h2>
+
+                        <p>Crear y/o modificar datos sobre un receptor</p>
+
+                    </article>
+
+                    <article class="art Sec-tra">
+                        <img src="/image/paisaje3.jpg" class="art-img" alt="filtrar-tra">
+                        <button id="btn-21" class="art-btn hide">-</button>
+
+                        <h2>Buscar</h2>
+
+                        <p>Realizar una ficha de trazabilidad para los materiales</p>
+                    </article>
+                </div>
+
+                <hr>
+
+                <div class="tab-text" id="tab-7" >
+
+                    <h2 class="title-inside">TAREAS</h2>
+
+                    <article class="art Sec-tar">
+                        <img src="/image/paisaje1.jpg" class="art-img" alt="crear-tar">
+                        <button id="btn-22" class="art-btn hide">-</button>
+
+                        <h2>Crear</h2>
+
+                        <p>Crear una nueva tarea</p>
+                    </article>
+
+                    <article class="art Sec-tar">
+
+                        <img src="/image/paisaje2.jpg" class="art-img" alt="editar-tar">
+                        <button id="btn-23" class="art-btn hide">-</button>
+
+                        <h2>Editar</h2>
+
+                        <p>Editar los datos de una tarea previamente creada</p>
+                    </article>
+
+                    <article class="art Sec-tar">
+
+                        <img src="/image/paisaje3.jpg" class="art-img" alt="filtrar-tar">
+                        <button id="btn-24" class="art-btn hide">-</button>
+
+                        <h2>Buscar</h2>
+
+                        <p>Filtrar las tareas mediante los datos previamente creados</p>
+                    </article>
+                </div>
+
+                <hr>
+
+                <div class="tab-text" id="tab-8">
+
+                    <h2 class="title-inside">ESTADISTICAS</h2>
+
+                    <article class="art Sec-est">
+
+                        <img src="/image/paisaje1.jpg" class="art-img" alt="est-??">
+                        <button id="btn-25" class="art-btn hide"></button>
+
+                        <h2>Lorem</h2>
+
+                        <p>Lorem ipsum sic amet</p>
+                    </article>
+
+                    <article class="art Sec-est">
+
+                        <img src="/image/paisaje2.jpg" class="art-img" alt="est-??">
+                        <button id="btn-26" class="art-btn hide">-</button>
+
+                        <h2>Lorem</h2>
+
+                        <p>Lorem ipsum sic amet</p>
+                    </article>
+
+                    <article class="art Sec-est">
+                        <img src="/image/paisaje3.jpg" class="art-img" alt="est-??">
+                        <button id="btn-27" class="art-btn hide">-</button>
+
+                        <h2>Lorem</h2>
+
+                        <p>Lorem ipsum sic amet</p>
+                    </article>
+                </div>
+
+            </section>
         </main>
         <p th:text="${message}"></p>
     </body>
