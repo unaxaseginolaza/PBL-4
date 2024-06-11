@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{template}" lang="eu">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{template}" lang="es">
 <head>
     <link rel="stylesheet" href="/css/list.css">
     <title>Customer Form</title>
@@ -9,13 +9,13 @@
     <h2 th:text="${customer.id != null} ? 'Edit Customer' : 'Create Customer'"></h2>
     <form th:action="${customer.id != null} ? @{/customer/update} : @{/customer/create}" th:object="${customer}" method="post" class="Form">
         <input type="hidden" th:if="${customer.id != null}" th:field="*{id}">
-        <label for="username">Username:</label>
+        <label for="username">Nombre de usuario:</label>
         <input type="text" id="username" name="username" th:field="*{username}" required>
         <div th:if="${customer.id == null}">
-            <label for="password">Password:</label>
+            <label for="password">Contraseña:</label>
             <input type="password" id="password" name="password" th:field="*{password}" required>
         </div>
-        <label for="companyName">companyName:</label>
+        <label for="companyName">Nombre de la Compañia:</label>
         <input type="text" id="companyName" name="companyName" th:field="*{companyName}" required>
         <button type="submit" th:text="${customer.id != null} ? 'Update' : 'Create'"></button>
     </form>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{template}" lang="eu" >
+<html  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{template}" lang="es" >
 <head>
     <title>Form Purchase</title>
     <link rel="stylesheet" href="/css/list.css">
@@ -9,13 +9,13 @@
         <h2 th:text="${purchase.id != null} ? 'Edit Purchase' : 'Create Purchase'"></h2>
         <form th:action="${purchase.id != null} ? @{/purchase/update} : @{/purchase/create}" th:object="${purchase}" method="post" class="Form">
             <input type="hidden" th:if="${purchase.id != null}" th:field="*{id}">
-            <label for="price">Price:</label>
+            <label for="price">Precio:</label>
             <input type="number" id="price" name="price" th:field="*{price}" step="0.01" required>
-            <label for="quantity">Quantity:</label>
+            <label for="quantity">Cantidad:</label>
             <input type="number" id="quantity" name="quantity" th:field="*{quantity}" step="0.01" required>
-            <label for="date">Date:</label>
+            <label for="date">Fecha:</label>
             <input type="date" id="date" name="date" th:field="*{date}" required>
-            <label for="supplier">Supplier (ID):</label>
+            <label for="supplier">Proveedor (ID):</label>
             <select id="supplier" name="supplier" th:field="*{supplier}">
                 <option th:each="supplier : ${suppliers}" th:value="${supplier.id}" th:text="${supplier.name}"></option>
             </select>

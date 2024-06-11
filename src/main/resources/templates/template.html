@@ -14,7 +14,19 @@
 <header layout:fragment="custom-header">
     <a href="/"><img src="/icon/home-line.svg" alt="home" id="homeButton"></a>
     <h1>EcoPlastic</h1>
-    <a href="/login"><img src="/icon/user-line.svg" alt="user" id="loginUserButton"></a>
+    <!-- Verifica si el usuario está autenticado -->
+    <th:block th:if="${session.userLogin != null}">
+        <!-- Botón de cierre de sesión -->
+        <a href="/logout">
+            <img src="/icon/logout-box-r-line.svg" alt="logout" id="logoutButton">
+        </a>
+    </th:block>
+    <th:block th:unless="${session.userLogin != null}">
+        <!-- Botón de inicio de sesión -->
+        <a href="/login">
+            <img src="/icon/user-line.svg" alt="user" id="loginUserButton">
+        </a>
+    </th:block>
 </header>
 
 <nav class="navbar navbar-expand-lg bg-light" layout:fragment="custom-nav">
@@ -27,63 +39,42 @@
 
         <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
             <ul class="menu">
-                <li>Empleados
+                <li>Usuarios
                     <ul class="submenu">
-                        <li>Crear Empleado</li>
-                        <li>Editar Empleado</li>
-                        <li>Filtrar por Empleado</li>
+                        <li><a href="/employee/form">Crear Empleado</a></li>
+                        <li><a href="/employee/list">Ver Empleado</a></li>
+                        <li><a href="/customer/form">Crear Cliente</a></li>
+                        <li><a href="/customer/list">Ver Cliente</a></li>
+                        <li><a href="/supplier/form">Crear Proveedor</a></li>
+                        <li><a href="/supplier/list">Ver Proveedor</a></li>
                     </ul>
                 </li>
                 <li>Secciones
                     <ul class="submenu">
-                        <li>Crear Sección</li>
-                        <li>Editar Sección</li>
-                        <li>Filtrar por Sección</li>
+                        <li><a href="/section/form">Crear Sección</a></li>
+                        <li><a href="/section/list">Ver Secciónes</a></li>
                     </ul>
                 </li>
                 <li>Materiales
                     <ul class="submenu">
-                        <li>Crear Materiales</li>
-                        <li>Editar Materiales</li>
-                        <li>Filtar por Materiales</li>
-                        <li>Crear Tipos de Materiales</li>
-                        <li>Editar Tipos de Materiales</li>
-                        <li>Filtar por Tipos de Materiales</li>
+                        <li><a href="/preProcessedMaterial/form">Crear Materiales</a></li>
+                        <li><a href="/preProcessedMaterial/list">Ver Materiales</a></li>
+                        <li><a href="/processedMaterial/form">Crear Materiales Procesados</a></li>
+                        <li><a href="/processedMaterial/list">Ver Materiales Procesados</a></li>
+                        <li><a href="/type/form">Crear Tipos de Materiales</a></li>
+                        <li><a href="/type/list">Ver Tipos de Materiales</a></li>
                     </ul>
                 </li>
                 <li>Compras
                     <ul class="submenu">
-                        <li>Crear Compra</li>
-                        <li>Editar Compra</li>
-                        <li>Filtar por Compra</li>
-                    </ul>
-                </li>
-                <li>Ventas
-                    <ul class="submenu">
-                        <li>Crear Venta</li>
-                        <li>Editar Venta</li>
-                        <li>Filtar por Venta</li>
-                    </ul>
-                </li>
-                <li>Transacciones
-                    <ul class="submenu">
-                        <li>Editar Proveedor</li>
-                        <li>Editar Receptor</li>
-                        <li>Crear Ficha Trazabilidad</li>
+                        <li><a href="/purchase/form">Crear Compra</a></li>
+                        <li><a href="/purchase/list">Ver Compra</a></li>
                     </ul>
                 </li>
                 <li>Tareas
                     <ul class="submenu">
-                        <li>Crear Tarea</li>
-                        <li>Editar Tarea</li>
-                        <li>Filtar por Tareas</li>
-                    </ul>
-                </li>
-                <li>Estadisticas
-                    <ul class="submenu">
-                        <li>op1</li>
-                        <li>op2</li>
-                        <li>op3</li>
+                        <li><a href="/task/form">Crear Tarea</a></li>
+                        <li><a href="/task/list">Ver Tarea</a></li>
                     </ul>
                 </li>
             </ul>

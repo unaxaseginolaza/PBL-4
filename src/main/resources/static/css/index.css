@@ -201,7 +201,8 @@ img{
     }
 }
 
-#loginUserButton{
+#loginUserButton,
+#logoutButton{
     width: 4rem;
     margin: 2rem;
 }

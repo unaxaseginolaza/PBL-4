@@ -10,15 +10,15 @@
     <h2 th:text="${task.id != null} ? 'Edit Task' : 'Create Task'"></h2>
     <form th:action="${task.id != null} ? @{/task/update} : @{/task/create}" th:object="${task}" method="post" class="Form">
         <input type="hidden" th:if="${task.id != null}" th:field="*{id}">
-        <label for="title">Title:</label>
+        <label for="title">Titulo:</label>
         <input type="text" id="title" name="title" th:field="*{title}" required>
-        <label for="summary">Summary:</label>
+        <label for="summary">Resumen:</label>
         <input type="text" id="summary" name="summary" th:field="*{summary}" required>
         <label for="creator">Creator (ID):</label>
         <select id="creator" name="creator" th:field="*{creator}">
             <option th:each="creator : ${creators}" th:value="${creator.id}" th:text="${creator.name}"></option>
         </select>
-        <label for="inCharge">InCharge (ID):</label>
+        <label for="inCharge">Empleado encargado (ID):</label>
         <select id="inCharge" name="inCharge" th:field="*{inCharge}">
             <option th:each="inCharge : ${inCharges}" th:value="${inCharge.id}" th:text="${inCharge.name}"></option>
         </select>

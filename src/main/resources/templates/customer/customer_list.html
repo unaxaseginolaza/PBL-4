@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{template}" lang="eu">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{template}" lang="es">
 <head>
     <title>Lista de Clientes</title>
     <link rel="stylesheet" href="/css/list.css">
@@ -10,16 +10,14 @@
     <table>
         <thead>
         <tr>
-            <th>Username</th>
-            <th>Company Name</th>
-            <th>Role</th> <!-- Assuming customers also have roles -->
-            <th>Actions</th>
+            <th>Nombre de usuario</th>
+            <th>Nombre de la Compañia</th><!-- Assuming customers also have roles -->
+            <th>Acciones</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="customer : ${customers}">
             <td th:text="${customer.username}"></td>
-            <td th:text="${customer.companyName}"></td>
             <td th:text="${customer.rol}"></td> <!-- Assuming there's a 'rol' field in customer -->
             <td>
                 <form th:action="@{/customer/edit/{id}(id=${customer.id})}" method="get">

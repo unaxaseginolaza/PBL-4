@@ -36,10 +36,10 @@ public class LoginController {
             model.addAttribute("message", "Welcome " + username);//Mensaje de bienvenida
             httpSession.setAttribute("userLogin", userService.findUserByUsername(username));//Datos del usuario logueado
             httpSession.setAttribute("userPermisos", userService.findUserByUsername(username).getRol());//Rol del usuario logueado
-            return "/index";
+            return "redirect:/";
         } else {
             model.addAttribute("error", "Invalid username or password");//Error de credenciales
-            return "/login";
+            return "redirect:/login";
         }
     }
 

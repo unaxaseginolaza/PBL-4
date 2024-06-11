@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{template}" lang="eu">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{template}" lang="es">
 <head>
     <link rel="stylesheet" href="/css/list.css">
     <title>Supplier Form</title>
@@ -9,7 +9,7 @@
     <h2 th:text="${supplier.id != null} ? 'Edit Supplier' : 'Create Supplier'"></h2>
     <form th:action="${supplier.id != null} ? @{/supplier/update} : @{/supplier/create}" th:object="${supplier}" method="post" class="Form">
         <input type="hidden" th:if="${supplier.id != null}" th:field="*{id}">
-        <label for="name">Name:</label>
+        <label for="name">Nombre:</label>
         <input type="text" id="name" name="name" th:field="*{name}" required>
         <label for="direction">Direccion:</label>
         <input type="text" id="direction" name="direction" th:field="*{direction}" required>
